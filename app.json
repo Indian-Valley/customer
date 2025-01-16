@@ -6,10 +6,11 @@
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "userInterfaceStyle": "automatic",
+    "scheme": "com.muminali13.indianvalley",
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.muminali13.IndianValley",
+      "bundleIdentifier": "com.muminali13.indianvalley",
       "buildNumber": "1.0.0"
     },
     "android": {
@@ -17,7 +18,7 @@
         "foregroundImage": "./assets/images/icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.muminali13.IndianValley",
+      "package": "com.muminali13.indianvalley",
       "versionCode": 1
     },
     "web": {
@@ -47,6 +48,9 @@
       "eas": {
         "projectId": "2f696299-6c1e-4d9e-a27d-739f12069a3d"
       }
+    },
+    "splash": {
+      "image": "./assets/images/main-logo-IV.png"
     }
   }
 }

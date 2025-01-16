@@ -1,6 +1,6 @@
-import {View, Text, StyleSheet, ScrollView, TouchableOpacity, Image} from 'react-native'
-import React, {Component, useState} from 'react';
-import {categories} from "@/constants";
+import {View, Text, ScrollView, TouchableOpacity, Image} from 'react-native'
+import React, { useState } from 'react';
+import {categories} from "../constants";
 
 export default function Categories() {
     const [activeCategory, setActiveCategory] = useState(null);

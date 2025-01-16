@@ -1,6 +1,6 @@
-import React from 'react'
+import React, {useState} from 'react'
 
-import { View, Text, TextInput, ScrollView } from 'react-native';
+import {View, Text, TextInput, ScrollView, TouchableOpacity} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import MapView, {Marker} from "react-native-maps";
 import * as Icon from "react-native-feather"
@@ -10,8 +10,13 @@ import { StatusBar } from "expo-status-bar";
 import FeaturedRow from "../components/FeaturedRow";
 import {featured, location} from "../constants";
 import {themeColors} from "../theme";
+import {useRouter} from "expo-router";
 
 export default function HomeScreen() {
+    const [deliverySelected, setDeliverySelected] = useState(true);
+
+    const navigation = useRouter();
+
     return (
         <SafeAreaView className="bg-white">
             <StatusBar style="dark"/>
@@ -25,43 +30,66 @@ export default function HomeScreen() {
                         <Text className="text-gray-600">Gravesend, Kent</Text>
                     </View>
                 </View>
-                <View style={{backgroundColor: themeColors.bgColor(1)}} className="p-3 rounded-full">
-                    <Icon.Sliders height="20" width="20" stroke="white"/>
-                </View>
+                <TouchableOpacity style={{backgroundColor: themeColors.bgColor(1)}}
+                                  className="p-3 rounded-full"
+                                  onPress={() => navigation.navigate('/login')}>
+                    <Icon.User height="20" width="20" stroke="white"/>
+                </TouchableOpacity>
             </View>
             <ScrollView showsVerticalScrollIndicator={false}
                         contentContainerStyle={{paddingBottom: 20}}
                         className="h-screen bg-white">
 
-                <View className="relative py-4 shadow-sm">
-                    <Text style={{fontFamily: 'Verdana'}} className='text-3xl font-extrabold text-center'>START YOUR ORDER</Text>
-                </View>
+                <View style={{backgroundColor: themeColors.bgColor(0.2)}}
+                      className='shadow-2xl rounded-3xl bg-white mx-3'>
 
-                <View className='mx-3'>
+                    <View className="relative py-4 shadow-sm">
+                        <Text style={{fontFamily: 'Verdana'}} className='text-3xl font-extrabold text-center text-gray-700'>START YOUR ORDER</Text>
+                    </View>
+
                     <MapView initialRegion={{
                         latitude: location.lat,
                         longitude: location.lng,
                         latitudeDelta: 0.01,
                         longitudeDelta: 0.01
                     }}
-                             className="w-full h-32 "
+                             className="w-full h-32"
                              mapType='standard'>
                         <Marker coordinate={{latitude: location.lat, longitude: location.lng}}
                                 title='Indian Valley'
                                 description="We're right here, at 59 Cotmandene Crescent BR5 2RA"
                                 pinColor={themeColors.bgColor(1)}/>
                     </MapView>
-                </View>
 
-                <View style={{backgroundColor: themeColors.bgColor(0.3)}} className='rounded-3xl mx-3 mt-2 p-1'>
+
                     <View className='flex-row'>
-                        <Text style={{backgroundColor: themeColors.bgColor(1)}} className='m-2 p-3 rounded-full text-white font-bold flex-1 text-center'>Delivery</Text>
-                        <Text style={{backgroundColor: themeColors.bgColor(1)}} className='m-2 p-3 rounded-full text-white font-bold flex-1 text-center'>Collection</Text>
+
+                        <TouchableOpacity style={{backgroundColor: themeColors.bgColor(deliverySelected? 1: 0.7)}}
+                                          className='flex-1 m-2 p-3 rounded-full'
+                                          onPress={() => setDeliverySelected(true)}>
+                            <Text className={`text-center text-lg text-white ${deliverySelected? "font-bold":"font-medium"}`}>Delivery</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={{backgroundColor: themeColors.bgColor(deliverySelected? 0.7: 1)}}
+                                          className='flex-1 m-2 p-3 rounded-full'
+                                          onPress={() => setDeliverySelected(false)}>
+                            <Text className={`text-center text-lg text-white ${deliverySelected? "font-medium" : "font-bold"}`}>Collection</Text>
+                        </TouchableOpacity>
                     </View>
+                    {
+                        deliverySelected? (
+                            <View>
+                                <Text>Delivery To:</Text>
+                            </View>
+                        ) : (
+                            <View>
+                                <Text>Collection for:</Text>
+                            </View>
+                        )
+                    }
+
                 </View>
 
-
-                <View className="mt-3">
+                <View className="my-3">
                     {
                         featured.map((item, index) => {
                             return (

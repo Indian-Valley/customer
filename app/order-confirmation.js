@@ -18,15 +18,14 @@ export default function OrderConfirmationScreen() {
     })
     return (
         <SafeAreaView className="flex-1 bg-white">
-            <View className="relative py-4 shadow-sm">
+            <View className="relative py-4 shadow-sm border-b border-gray-400">
                 <TouchableOpacity onPress={()=>{ navigation.dismissTo('/home') }}
                                   style={{backgroundColor: themeColors.bgColor(1)}}
                                   className="z-10 absolute top-3 left-3 rounded-full p-1">
                     <Icon.ArrowLeft strokeWidth={3} stroke={'white'}></Icon.ArrowLeft>
                 </TouchableOpacity>
                 <View>
-                    <Text className="text-center font-bold text-xl">Checkout</Text>
-                    <Text className="text-center font-bold text-xs text-gray-500">Make sure you got everything!</Text>
+                    <Text className="text-center font-bold text-xl">Order Placed!</Text>
                 </View>
             </View>
             <MapView initialRegion={{

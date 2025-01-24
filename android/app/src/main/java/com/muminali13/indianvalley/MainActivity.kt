@@ -1,4 +1,4 @@
-package com.muminali13.IndianValley
+package com.muminali13.indianvalley
 import expo.modules.splashscreen.SplashScreenManager
 
 import android.os.Build

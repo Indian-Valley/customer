@@ -1,4 +1,4 @@
-package com.muminali13.IndianValley
+package com.muminali13.indianvalley
 
 import android.app.Application
 import android.content.res.Configuration

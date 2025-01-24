@@ -7,9 +7,9 @@ import * as Icon from "react-native-feather"
 
 import { StatusBar } from "expo-status-bar";
 
-import FeaturedRow from "../components/FeaturedRow";
-import {featured, location} from "../constants";
-import {themeColors} from "../theme";
+import FeaturedRow from "../../components/FeaturedRow";
+import {featured, location} from "../../constants";
+import {themeColors} from "../../theme";
 import {useRouter} from "expo-router";
 
 export default function HomeScreen() {
@@ -32,13 +32,13 @@ export default function HomeScreen() {
                 </View>
                 <TouchableOpacity style={{backgroundColor: themeColors.bgColor(1)}}
                                   className="p-3 rounded-full"
-                                  onPress={() => navigation.navigate('/login')}>
+                                  onPress={() => navigation.push('/account')}>
                     <Icon.User height="20" width="20" stroke="white"/>
                 </TouchableOpacity>
             </View>
             <ScrollView showsVerticalScrollIndicator={false}
                         contentContainerStyle={{paddingBottom: 20}}
-                        className="h-screen bg-white">
+                        className="bg-white">
 
                 <View style={{backgroundColor: themeColors.bgColor(0.2)}}
                       className='shadow-2xl rounded-3xl bg-white mx-3'>
@@ -64,12 +64,12 @@ export default function HomeScreen() {
 
                     <View className='flex-row'>
 
-                        <TouchableOpacity style={{backgroundColor: themeColors.bgColor(deliverySelected? 1: 0.7)}}
+                        <TouchableOpacity style={{backgroundColor: themeColors.bgColor(deliverySelected? 1: 0.5)}}
                                           className='flex-1 m-2 p-3 rounded-full'
                                           onPress={() => setDeliverySelected(true)}>
                             <Text className={`text-center text-lg text-white ${deliverySelected? "font-bold":"font-medium"}`}>Delivery</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={{backgroundColor: themeColors.bgColor(deliverySelected? 0.7: 1)}}
+                        <TouchableOpacity style={{backgroundColor: themeColors.bgColor(deliverySelected? 0.5: 1)}}
                                           className='flex-1 m-2 p-3 rounded-full'
                                           onPress={() => setDeliverySelected(false)}>
                             <Text className={`text-center text-lg text-white ${deliverySelected? "font-medium" : "font-bold"}`}>Collection</Text>
@@ -77,12 +77,39 @@ export default function HomeScreen() {
                     </View>
                     {
                         deliverySelected? (
-                            <View>
-                                <Text>Delivery To:</Text>
+                            <View className="m-2 p-3 bg-white rounded-2xl">
+                                <Text className="font-bold mb-1">Delivery To:</Text>
+                                <View className="flex-row">
+                                    <TextInput className="flex-1 rounded-xl py-1 px-2 text-gray-600 border"
+                                               placeholder="Postcode"/>
+                                    <TouchableOpacity className="flex-2 bg-gray-700 mx-1 rounded-xl py-1 px-2">
+                                        <Text className="text-white text-xs text-center">Find Address</Text>
+                                    </TouchableOpacity>
+                                </View>
+                                <Text className="text-gray-700 text-xs mt-1 text-right">Or Enter Address Manually</Text>
+
+                                <TextInput className="border rounded-xl px-2 py-1" placeholder="Address line 1"/>
+                                <TextInput className="border rounded-xl px-2 py-1 mt-1" placeholder="Address line 2"/>
+                                <TextInput className="border rounded-xl px-2 py-1 mt-1" placeholder="Town"/>
+
+                                <TouchableOpacity style={{backgroundColor: themeColors.bgColor(1)}}
+                                                  className='flex-1 mt-2 p-3 rounded-full mx-auto w-1/2'
+                                                  onPress={() => navigation.navigate('/menu')}>
+                                    <Text className="font-bold text-lg text-center text-white">Next</Text>
+                                </TouchableOpacity>
                             </View>
                         ) : (
-                            <View>
-                                <Text>Collection for:</Text>
+                            <View className="m-2 p-3 bg-white rounded-2xl">
+                                <Text className="font-bold mb-1">Collection for:</Text>
+
+                                <TextInput className="border rounded-xl px-2 py-1 mt-1" placeholder="Name"/>
+                                <TextInput className="border rounded-xl px-2 py-1 mt-1" placeholder="Time"/>
+
+                                <TouchableOpacity style={{backgroundColor: themeColors.bgColor(1)}}
+                                                  className='flex-1 mt-2 p-3 rounded-full mx-auto w-1/2'
+                                                  onPress={() => navigation.navigate('/menu')}>
+                                    <Text className="font-bold text-lg text-center text-white">Next</Text>
+                                </TouchableOpacity>
                             </View>
                         )
                     }

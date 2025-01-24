@@ -1,12 +1,12 @@
 import {View, Text, StyleSheet, SafeAreaView, ScrollView, Image, TouchableOpacity} from 'react-native';
 import React, {useEffect} from 'react'
 import * as Icon from "react-native-feather"
-import {themeColors} from "../theme";
+import {themeColors} from "../../theme";
 import { useRouter } from "expo-router";
 import MapView, {Marker} from "react-native-maps";
-import {location} from "../constants"
+import {location} from "../../constants"
 import {useDispatch} from "react-redux";
-import {emptyCart} from "../slices/cartSlice";
+import {emptyCart} from "../../slices/cartSlice";
 
 
 export default function OrderConfirmationScreen() {

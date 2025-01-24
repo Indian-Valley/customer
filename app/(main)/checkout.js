@@ -1,10 +1,10 @@
 import {Image, ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import React, {useEffect, useState} from 'react'
 import * as Icon from "react-native-feather"
-import {themeColors} from "../theme";
+import {themeColors} from "../../theme";
 import {useRouter} from "expo-router";
 import {useDispatch, useSelector} from "react-redux";
-import {removeFromCart, selectCartItems, selectCartTotal} from "../slices/cartSlice";
+import {removeFromCart, selectCartItems, selectCartTotal} from "../../slices/cartSlice";
 
 
 export default function CheckoutScreen() {
@@ -44,7 +44,7 @@ export default function CheckoutScreen() {
 
             <View style={{backgroundColor: themeColors.bgColor(0.3)}}
                   className="flex-row p-4 items-center">
-                <Image source={require("../assets/images/food-delivery.png")} className="w-20 h-20"/>
+                <Image source={require("../../assets/images/food-delivery.png")} className="w-20 h-20"/>
                 <Text className="flex-1 pl-4">Delivery in 30-40 minutes</Text>
                 <TouchableOpacity onPress={()=>{ }}>
                     <Text style={{color: themeColors.text}} className="font-bold">Change</Text>

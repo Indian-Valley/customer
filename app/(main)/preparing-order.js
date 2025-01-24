@@ -2,16 +2,15 @@ import {View, Text, Image } from 'react-native';
 import React, {useEffect, useState} from 'react'
 import { useRouter} from "expo-router";
 
-import createOrder from '../services/OrderService.js';
 import {useSelector} from "react-redux";
-import {selectCartItems, selectCartTotal} from "../slices/cartSlice";
+import {selectCartItems, selectCartTotal} from "../../slices/cartSlice";
+import ApiManager from "../../apiManager/apiManager";
 
 
 export default function OrderPreparingScreen() {
 
     const cartItems = useSelector(selectCartItems);
     const cartTotal = useSelector(selectCartTotal);
-    const [items, setItems] = useState([]);
 
     const navigation = useRouter();
     useEffect(() => {
@@ -32,30 +31,23 @@ export default function OrderPreparingScreen() {
             }
             return group;
         }, [])
-        console.log('orderItems: ', orderItems);
+        // console.log('orderItems: ', orderItems);
 
         async function postOrderToServer() {
-            return createOrder("Mumin",
-                orderItems,
-                cartTotal,
-                false,
-                "22:22:11",
-                "cash"
-            );
-        }
-
-        postOrderToServer().then(response => {
-            if (response.ok) {
+            const res = await ApiManager.newOrder("Mumin", orderItems, cartTotal, false, "22:22:11", "cash");
+            console.log('res', res)
+            if (res?.success) {
                 navigation.replace("/order-confirmation")
             } else {
-                console.log("error: ", response)
+                console.log("error: ", res?.error)
                 navigation.replace("/order-error")
             }
-        });
+        }
+        postOrderToServer()
     })
     return (
         <View className="flex-1 bg-white justify-center items-center">
-            <Image source={require('../assets/images/chef.gif')} className="w-80 h-80"/>
+            <Image source={require('../../assets/images/chef.gif')} className="w-80 h-80"/>
             <Text className="text-gray-600 font-bold text-lg">Placing your order...</Text>
         </View>
     )

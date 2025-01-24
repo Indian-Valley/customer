@@ -24,7 +24,8 @@
         <action android:name="android.intent.action.VIEW"/>
         <category android:name="android.intent.category.DEFAULT"/>
         <category android:name="android.intent.category.BROWSABLE"/>
-        <data android:scheme="com.muminali13.IndianValley"/>
+        <data android:scheme="com.muminali13.indianvalley"/>
+        <data android:scheme="com.muminali13.indianvalley"/>
         <data android:scheme="exp+indian-valley"/>
       </intent-filter>
     </activity>

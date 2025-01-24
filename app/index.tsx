@@ -1,22 +1,24 @@
 import React, {useEffect} from 'react'
 
-import { View, Image, Text, TextInput, ScrollView } from 'react-native';
+import {View, Image, ActivityIndicator} from 'react-native';
 
 import { StatusBar } from "expo-status-bar";
-import {useRouter} from "expo-router";
+import {theme} from "@/constants/theme";
 
 
 export default function StartScreen() {
-    const navigation = useRouter();
-    useEffect(() => {
-        setTimeout(()=>{
-            navigation.replace('/home')
-        }, 1000)
-    })
+
     return (
-      <View className="flex-1 bg-white">
+      <View className="flex-1 justify-center items-center bg-white">
         <StatusBar style="dark"/>
-        <Image source={require('@/assets/images/main-logo-IV.png')} className='m-auto' />
+
+          <View className="mx-1 my-10">
+              <Image source={require('@/assets/images/main-logo-IV.png')} resizeMode='contain' />
+          </View>
+        <ActivityIndicator className='m-4'
+                         color={theme.colors.darkLight}
+                         size='large'/>
+
       </View>
   )
 }

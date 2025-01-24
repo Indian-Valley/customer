@@ -1,6 +1,6 @@
 import {View, Text, TouchableWithoutFeedback, Image} from 'react-native';
 import React from "react";
-import {themeColors} from "@/theme";
+import { themeColors } from "../theme";
 import { useRouter} from "expo-router";
 
 export default function ItemCard({ item }) {

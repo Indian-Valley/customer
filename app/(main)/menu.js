@@ -2,12 +2,12 @@ import {View, Text, StyleSheet, SafeAreaView, ScrollView, Image, TouchableOpacit
 import React from 'react'
 import {useRoute} from "@react-navigation/native";
 import * as Icon from "react-native-feather"
-import {themeColors} from "../theme";
+import {themeColors} from "../../theme";
 import {useRouter} from "expo-router";
-import Categories from "../components/Categories";
-import {menu} from "../constants";
-import DishRow from "../components/DishRow";
-import CartIcon from "../components/CartIcon";
+import Categories from "../../components/Categories";
+import {menu} from "../../constants";
+import DishRow from "../../components/DishRow";
+import CartIcon from "../../components/CartIcon";
 import {StatusBar} from "expo-status-bar";
 
 

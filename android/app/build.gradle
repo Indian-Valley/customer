@@ -86,9 +86,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace 'com.muminali13.IndianValley'
+    namespace 'com.muminali13.indianvalley'
     defaultConfig {
-        applicationId 'com.muminali13.IndianValley'
+        applicationId 'com.muminali13.indianvalley'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

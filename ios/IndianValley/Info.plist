@@ -27,7 +27,8 @@
       <dict>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>com.muminali13.IndianValley</string>
+          <string>com.muminali13.indianvalley</string>
+          <string>com.muminali13.indianvalley</string>
         </array>
       </dict>
       <dict>

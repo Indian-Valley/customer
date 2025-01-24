@@ -1,7 +1,7 @@
 import {View, Text, StyleSheet, SafeAreaView, ScrollView, Image, TouchableOpacity} from 'react-native';
 import React from 'react'
 import * as Icon from "react-native-feather"
-import {themeColors} from "../theme";
+import {themeColors} from "../../theme";
 import { useRouter} from "expo-router";
 
 

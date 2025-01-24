@@ -1,7 +1,7 @@
 import {ScrollView, Text, TouchableOpacity, View} from 'react-native'
 import React from "react";
-import {themeColors} from "@/theme";
-import ItemCard from "@/components/ItemCard";
+import {themeColors} from "../theme";
+import ItemCard from "../components/ItemCard";
 
 export default function FeaturedRow({title, description, items}) {
     return (

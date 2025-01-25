@@ -17,7 +17,7 @@ import * as Icon from "react-native-feather";
 import {supabase} from "../lib/supabase";
 import {Link, useRouter} from "expo-router";
 import LoadingButton from "../components/LoadingButton";
-import Input from "../components/Input.js";
+import Input from "../components/Input";
 
 
 export default function LoginScreen() {

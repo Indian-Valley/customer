@@ -10,6 +10,7 @@ export const lightTheme = {
         card: '#f9f9f9',
         border: '#9F9F9F',
         primary: '#2B4D17',
+        primaryTransparent: (opacity) => `rgba(43, 77, 23, ${opacity})`,
         background: '#DCE0D9',
         link: '#26A96C'
     }
@@ -24,7 +25,8 @@ export const darkTheme = {
         defaultText: '#616161',
         card: '#191919',
         border: '#444859',
-        primary: '#f9f9f9',
+        primary: '#b9b9b9',
+        primaryTransparent: (opacity) => `rgba(185, 185, 185, ${opacity})`,
         background: '#0D1B2A',
         link: '#26A96C'
     }

@@ -1,13 +1,16 @@
 import {Image, ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import React, {useEffect, useState} from 'react'
 import * as Icon from "react-native-feather"
-import {themeColors} from "../../../theme";
 import {useRouter} from "expo-router";
 import {useDispatch, useSelector} from "react-redux";
 import {removeFromCart, selectCartItems, selectCartTotal} from "../../../slices/cartSlice";
+import {useTheme} from "@react-navigation/native";
 
 
 export default function CheckoutScreen() {
+
+    const {colors} = useTheme();
+
     const navigation = useRouter();
     const cartItems = useSelector(selectCartItems);
     const cartTotal = useSelector(selectCartTotal);
@@ -28,10 +31,10 @@ export default function CheckoutScreen() {
     }, [cartItems]);
 
     return (
-        <View className="bg-white flex-1">
+        <View className="flex-1">
             <View className="relative py-4 shadow-sm">
                 <TouchableOpacity onPress={()=>{ navigation.back() }}
-                                  style={{backgroundColor: themeColors.bgColor(1)}}
+                                  style={{backgroundColor: colors.link}}
                                   className="absolute z-10 top-3 left-3 rounded-full p-1">
                     <Icon.ArrowLeft strokeWidth={3} stroke={'white'}></Icon.ArrowLeft>
                 </TouchableOpacity>
@@ -42,34 +45,33 @@ export default function CheckoutScreen() {
 
             </View>
 
-            <View style={{backgroundColor: themeColors.bgColor(0.3)}}
+            <View style={{backgroundColor: colors.primaryTransparent(0.3)}}
                   className="flex-row p-4 items-center">
-                <Image source={require("../../../../assets/images/food-delivery.png")} className="w-20 h-20"/>
-                <Text className="flex-1 pl-4">Delivery in 30-40 minutes</Text>
-                <TouchableOpacity onPress={()=>{ }}>
-                    <Text style={{color: themeColors.text}} className="font-bold">Change</Text>
-                </TouchableOpacity>
+                    <Image source={require("@/assets/images/food-delivery.png")} className="w-20 h-20"/>
+                    <Text className="flex-1 pl-4">Delivery in 30-40 minutes</Text>
+                    <TouchableOpacity onPress={()=>{ }}>
+                        <Text style={{color: colors.text}} className="font-bold">Change</Text>
+                    </TouchableOpacity>
             </View>
 
-            <ScrollView className="bg-white pt-5"
+            <ScrollView className="pt-5"
                         showsVerticalScrollIndicator={false}
-                        contentContainerStyle={{
-                            paddingBottom: 50
-                        }}>
+                        contentContainerStyle={{ paddingBottom: 50 }}>
                 {
                     Object.entries(groupedItems).map(([key, items]) => {
                         let dish = items[0];
                         return (
                             <View key={key}
-                                  className="flex-row items-center space-x-3 py-2 px-4 bg-white rounded-3xl mx-2 mb-3 shadow-md">
-                                <Text className="font-bold" style={{color: themeColors.text}}>
+                                  style={{backgroundColor:colors.background}}
+                                  className="flex-row items-center space-x-3 py-2 px-4 rounded-3xl mx-2 mb-3 shadow-md">
+                                <Text className="font-bold" style={{color: colors.text}}>
                                     {items.length} x
                                 </Text>
                                 <Text className="font-bold flex-1">{dish.name}</Text>
                                 <Text className="font-semibold text-xs">{`£${dish.price.toFixed(2)}`}</Text>
                                 <TouchableOpacity
                                     onPress={() => dispatch(removeFromCart({id: dish.id}))}
-                                    style={{backgroundColor: themeColors.bgColor(1)}}
+                                    style={{backgroundColor: colors.primary}}
                                     className="p-1 rounded-full">
                                     <Icon.Minus strokeWidth={2} height={20} width={20} stroke={'white'}/>
                                 </TouchableOpacity>
@@ -79,7 +81,7 @@ export default function CheckoutScreen() {
                 }
             </ScrollView>
 
-            <View style={{backgroundColor: themeColors.bgColor(0.2)}}
+            <View style={{backgroundColor: colors.primaryTransparent(0.2)}}
                   className="py-6 px-8 rounded-t-3xl space-y-4">
                 <View className="flex-row justify-between">
                     <Text className="text-gray-700">Subtotal</Text>
@@ -95,7 +97,7 @@ export default function CheckoutScreen() {
                 </View>
                 <View>
                     <TouchableOpacity onPress={()=>navigation.navigate('/preparing-order')}
-                                      style={{backgroundColor:themeColors.bgColor(1)}}
+                                      style={{backgroundColor: colors.primary}}
                                       className="p-3 rounded-full">
                         <Text className="font-bold text-lg text-center text-white">Place Order</Text>
                     </TouchableOpacity>

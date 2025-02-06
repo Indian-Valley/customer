@@ -21,7 +21,6 @@ export default function OrderScreen() {
                     <Text style={{fontFamily: 'Verdana'}} className='text-3xl font-extrabold text-center text-gray-700'>START YOUR ORDER</Text>
                 </View>
 
-
                 <View className='flex-row'>
 
                     <TouchableOpacity style={{backgroundColor: colors.background}}

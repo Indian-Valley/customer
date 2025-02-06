@@ -30,6 +30,7 @@ export default function _layout() {
     )
 }
 
+
 function MainLayout() {
     const {colorScheme, setColorScheme} = useColorScheme();
     console.log(colorScheme)
@@ -41,7 +42,7 @@ function MainLayout() {
         let res = await ApiManager.getCustomerDetails(user?.id)
         // console.log(res)
         if (res) {
-            setUserData(res)
+            setUserData({...user, ...res})
             // console.log('user: ', user)
         }
     }
@@ -55,7 +56,7 @@ function MainLayout() {
                 router.replace("/home");
             } else {
                 setAuth(null);
-                router.replace("/");
+                router.replace("/welcome");
             }
         })
 

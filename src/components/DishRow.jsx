@@ -1,10 +1,13 @@
 import {View, Text, TouchableOpacity } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux';
-import {themeColors} from "../theme";
 import * as Icon from "react-native-feather"
 import {addToCart, removeFromCart, selectCartItemsById} from "../slices/cartSlice";
+import {useTheme} from "@react-navigation/native";
 
 export default function DishRow({item}) {
+
+    const { colors } = useTheme();
+
     const dispatch = useDispatch()
     const totalItems = useSelector(state => selectCartItemsById(state, item.id))
     const handleIncrease = () => {
@@ -24,7 +27,7 @@ export default function DishRow({item}) {
                             <TouchableOpacity onPress={handleDecrease}
                                             disabled={!totalItems.length}
 
-                                style={{backgroundColor:themeColors.bgColor(1)}}
+                                style={{backgroundColor: colors.link}}
                                 className="p-1 rounded-full">
                                 <Icon.Minus strokeWidth={2} height={20} width={20} stroke={'white'}/>
                             </TouchableOpacity>
@@ -41,7 +44,7 @@ export default function DishRow({item}) {
 
                     <TouchableOpacity
                         onPress={handleIncrease}
-                        style={{backgroundColor:themeColors.bgColor(1)}}
+                        style={{backgroundColor: colors.link}}
                         className="p-1 rounded-full">
                         <Icon.Plus strokeWidth={2} height={20} width={20} stroke={'white'}/>
                     </TouchableOpacity>

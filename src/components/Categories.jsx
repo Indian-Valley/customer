@@ -1,11 +1,14 @@
 import {View, Text, ScrollView, TouchableOpacity, Image} from 'react-native'
 import React, { useState } from 'react';
 import {categories} from "../constants";
+import {useTheme} from "@react-navigation/native";
 
 export default function Categories() {
     const [activeCategory, setActiveCategory] = useState(null);
+    const {colors} = useTheme();
+
     return(
-        <View>
+        <View style={{backgroundColor: colors.background}}>
             <ScrollView horizontal={true}
                         showsHorizontalScrollIndicator={false}
                         contentContainerStyle={{paddingHorizontal: 15}}

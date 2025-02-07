@@ -12,7 +12,7 @@ export default function TabBarButton({label, isFocused, onPress, onLongPress, ta
     useEffect(() => {
         scale.value = withSpring(
             isFocused? 1 : 0,
-            {duration: 350}
+            {duration: 300}
         )
     }, [scale, isFocused]);
 
@@ -22,8 +22,8 @@ export default function TabBarButton({label, isFocused, onPress, onLongPress, ta
     })
 
     const animatedIconStyle = useAnimatedStyle(() => {
-        const scaleValue = interpolate(scale.value, [0,1], [1, 1.3])
-        const top = interpolate(scale.value, [0, 1], [0, 7])
+        const scaleValue = interpolate(scale.value, [0, 1], [1, 1.5])
+        const top = interpolate(scale.value, [0, 1], [0, 10])
 
         return { transform: [{ scale: scaleValue }], top }
     })

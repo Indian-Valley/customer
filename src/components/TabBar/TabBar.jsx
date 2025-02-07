@@ -20,7 +20,7 @@ export default function TabBar({ state, descriptors, navigation }) {
                     shadowRadius: 20,
                     elevation: 4
               }}
-              className='flex-row  justify-items-center absolute bottom-0 rounded-t-3xl pt-2'
+              className='flex-row justify-items-center absolute bottom-0 rounded-t-3xl pt-3'
         >
             {state.routes.map((route, i) => {
                 const {options} = descriptors[route.key]

@@ -10,11 +10,11 @@ export default function FeaturedRow({title, description, items}) {
         <View className="mt-2">
             <View className="flex-row justify-between items-center px-4 py-2">
                 <View>
-                    <Text className="font-bold text-lg">{title}</Text>
-                    <Text className="font-gray-500 text-xs">{description}</Text>
+                    <Text style={{color: colors.text}} className="font-bold text-xl">{title}</Text>
+                    <Text style={{color: colors.text}} className="font-gray-500 text-sm">{description}</Text>
                 </View>
                 <TouchableOpacity onPress={() => {}}>
-                    <Text style={{color: colors.text}} className="font-semibold">See All</Text>
+                    <Text style={{color: colors.link}} className="font-semibold">See All</Text>
                 </TouchableOpacity>
             </View>
             <ScrollView horizontal={true}

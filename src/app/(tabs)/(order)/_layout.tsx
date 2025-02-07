@@ -1,7 +1,12 @@
 import { Stack } from 'expo-router';
 import React from "react";
+import {useHeaderHeight} from "@react-navigation/elements";
+import {useTheme} from "@react-navigation/native";
 
 export default function OrderLayout() {
+
+    const {colors} = useTheme()
+
     return (
         <Stack screenOptions={{ headerShown: false }}>
             <Stack.Screen name="index" options={{title: "Order"}}/>

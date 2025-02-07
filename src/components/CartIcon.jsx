@@ -39,11 +39,11 @@ export default function CartIcon() {
     }
 
     return (
-        <Animated.View style={{opacity:fadeAnim}} className="absolute bottom-2 w-full px-5 z-50">
+        <Animated.View style={{opacity:fadeAnim}} className="absolute bottom-24 w-full px-5 z-50">
             <TouchableOpacity
                 onPress={() => {navigation.navigate("/checkout")}}
                 style={{
-                    backgroundColor: colors.primary,
+                    backgroundColor: colors.link,
                     shadowColor: colors.primary,
                     shadowOffset: {width: 0, height: 5},
                     shadowOpacity: 0.7,

@@ -1,13 +1,11 @@
 import React from 'react'
 
-import {View, ScrollView } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-
-import { StatusBar } from "expo-status-bar";
 
 import FeaturedRow from "../../components/FeaturedRow";
 import { featured } from "../../constants";
-import {useTheme} from "@react-navigation/native";
+import { useTheme } from "@react-navigation/native";
 
 export default function HomeScreen() {
 

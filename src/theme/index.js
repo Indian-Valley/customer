@@ -21,13 +21,13 @@ export const darkTheme = {
     dark: true,
     colors: {
         ...DarkTheme.colors,
-        text: '#c9c9c9',
+        text: '#b5b5b5',
         defaultText: '#616161',
-        card: '#191919',
+        card: '#1b221b',
         border: '#444859',
         primary: '#b9b9b9',
         primaryTransparent: (opacity) => `rgba(185, 185, 185, ${opacity})`,
-        background: '#0D1B2A',
+        background: '#040a02',
         link: '#26A96C'
     }
 }

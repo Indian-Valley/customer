@@ -1,7 +1,7 @@
 import {View, Text, ScrollView, Image, TouchableOpacity, Dimensions} from 'react-native';
 import React from 'react'
 import * as Icon from "react-native-feather"
-import {Stack, useRouter} from "expo-router";
+import {Stack } from "expo-router";
 import Categories from "../../../components/Categories";
 import DishRow from "@/src/components/DishRow";
 import CartIcon from "@/src/components/CartIcon";
@@ -14,21 +14,27 @@ import {menu} from "../../../constants";
 export default function OrderScreen() {
     const { width, height } = Dimensions.get('window');
     const {colors} = useTheme()
-    const headerHeight = useHeaderHeight();
+    const scrollRef = useAnimatedRef();
 
     const [search, setSearch] = React.useState('');
-    const [activeCategory, setActiveCategory] = React.useState('');
+    const [activeCategory, setActiveCategory] = React.useState(null);
 
     const searchFilter = (item) => {
-      if (search) {
-          return item.name.toLowerCase().includes(search.toLowerCase())
-      }
-      return true
+        if (search) {
+            return item.name.toLowerCase().includes(search.toLowerCase())
+        }
+        return true
+    }
+    const categoryFilter = (cat) => {
+        if (activeCategory !== null) {
+            return cat.id === activeCategory;
+        }
+        return true
     }
 
     const getFilteredMenu = () => {
         let filteredMenu = []
-        menu.forEach((category, index) => {
+        menu.filter(categoryFilter).forEach((category, index) => {
             let dishes = category.dishes.filter(searchFilter)
             if (dishes.length > 0) {
                 const filteredCategory = {id: category.id, category: category.category, dishes};
@@ -39,7 +45,6 @@ export default function OrderScreen() {
         return filteredMenu
     }
 
-    const scrollRef = useAnimatedRef()
     const scrollHandler = useScrollViewOffset(scrollRef)
     const buttonStyle = useAnimatedStyle(() => {
 
@@ -61,12 +66,10 @@ export default function OrderScreen() {
                               headerTitle: "Menu",
                               headerTransparent: true,
                               headerBlurEffect: 'systemUltraThinMaterial',
-                              headerLargeTitle: true,
 
                               headerTitleStyle: {
                                   color: colors.text,
                               },
-                              headerLargeTitleShadowVisible: false,
                               headerShadowVisible: false,
                               headerSearchBarOptions: {
                                   placeholder: "Search menu...",
@@ -78,29 +81,36 @@ export default function OrderScreen() {
             <ScrollView contentInsetAdjustmentBehavior='automatic'
                         keyboardDismissMode='on-drag'
                         ref={scrollRef}
-                        style={{paddingTop: height/4}} >
+                        style={{paddingTop: useHeaderHeight()}} stickyHeaderIndices={[2]}>
 
+                <View className='w-full h-32' />
 
                 <View style={{borderTopLeftRadius: 40, borderTopRightRadius: 40, backgroundColor: colors.background}}
-                      className="-mt-12 pl-3">
-                    <Text style={{color: colors.text}} className="text-3xl p-3 font-bold">Menu</Text>
+                      className="-mt-12 px-3">
+                    <Text style={{color: colors.text}} className="text-3xl py-3 font-bold text-center">Menu</Text>
+
+                    <Text style={{color: colors.text}} className="text-sm pb-3 text-center">
+                        If you have, or someone you're ordering for has, a food allergy or intolerance, please phone the
+                        restaurant before placing your order.
+                    </Text>
                 </View>
-                <Categories/>
 
-                <View style={{backgroundColor: colors.background, paddingBottom: height/4}} className='z-50'>
-                    {
-                        getFilteredMenu().map((category, index) => (
-                            <View key={index}>
-                                <Text id={category.category} className="text-2xl font-bold p-3">{category.category}</Text>
+                <Categories activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
 
-                                {
-                                    category.dishes.map((item, index) => <DishRow key={index} item={{...item}}/>)
-                                }
+                {
+                    getFilteredMenu().map((category) => (<>
+                        <View key={category.category} style={{backgroundColor: colors.background}}>
+                            <Text id={category.category} style={{color: colors.text}} className="text-2xl font-bold p-3">{category.id + ' ' + category.category}</Text>
+                        </View>
 
-                            </View>
-                        ))
-                    }
-                </View>
+                        <View key={category.category+'Items'} style={{backgroundColor: colors.background}}>
+                        {
+                            category.dishes.map((item) => <DishRow key={item.id} item={{...item}}/>)
+                        }
+                        </View>
+                    </>))
+                }
+                <View className='w-full h-32' />
             </ScrollView>
 
             <CartIcon/>

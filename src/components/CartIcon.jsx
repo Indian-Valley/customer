@@ -2,7 +2,7 @@ import {View, Text, TouchableOpacity, Animated, useAnimatedValue} from 'react-na
 import React from 'react';
 import { useSelector } from 'react-redux'
 import { useRouter } from "expo-router";
-import {selectCartItems, selectCartTotal} from "../slices/cartSlice";
+import {numCartItems, selectCartTotal} from "../slices/cartSlice";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import {useTheme} from "@react-navigation/native";
 
@@ -11,7 +11,7 @@ export default function CartIcon() {
     const { colors } = useTheme()
     const navigation =  useRouter();
 
-    const cartItems = useSelector(selectCartItems)
+    const cartItems = useSelector(numCartItems)
     const cartTotal = useSelector(selectCartTotal)
 
     const fadeAnim = useAnimatedValue(0);
@@ -32,7 +32,7 @@ export default function CartIcon() {
         }).start();
     };
 
-    if (!cartItems.length) {
+    if (!cartItems) {
         fadeOut()
     } else {
         fadeIn()
@@ -50,15 +50,14 @@ export default function CartIcon() {
                     shadowRadius: 20,
                     elevation: 4
                 }}
-                onPressIn={(className) => 'animation-pulse'}
                 className="flex-row justify-between items-center rounded-full p-2 px-5">
 
                 <View className='flex-row gap-3 items-center'>
-                    <FontAwesome name='shopping-bag' size={22} color="white"/>
-                    <Text className="font-bold text-lg text-white">View Order</Text>
+                    <FontAwesome name='shopping-bag' size={22} color={colors.linkText}/>
+                    <Text style={{color: colors.linkText}} className="font-bold text-lg">View Order</Text>
                 </View>
 
-                <Text className="text-lg font-extrabold text-white">{`£${cartTotal.toFixed(2)}`}</Text>
+                <Text style={{color: colors.linkText}} className="text-lg font-extrabold">{`£${cartTotal.toFixed(2)}`}</Text>
             </TouchableOpacity>
         </Animated.View>
     )

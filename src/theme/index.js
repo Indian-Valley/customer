@@ -12,7 +12,8 @@ export const lightTheme = {
         primary: '#2B4D17',
         primaryTransparent: (opacity) => `rgba(43, 77, 23, ${opacity})`,
         background: '#DCE0D9',
-        link: '#26A96C'
+        link: '#26A96C',
+        linkText: '#ffffff'
     }
 }
 
@@ -24,11 +25,12 @@ export const darkTheme = {
         text: '#b5b5b5',
         defaultText: '#616161',
         card: '#1b221b',
-        border: '#444859',
+        border: '#15290c',
         primary: '#b9b9b9',
         primaryTransparent: (opacity) => `rgba(185, 185, 185, ${opacity})`,
         background: '#040a02',
-        link: '#26A96C'
+        link: '#26A96C',
+        linkText: '#ffffff'
     }
 }
 

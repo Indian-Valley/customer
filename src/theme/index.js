@@ -14,6 +14,12 @@ export const lightTheme = {
         background: '#DCE0D9',
         link: '#26A96C',
         linkText: '#ffffff'
+    },
+    shadowStyle: {
+        shadowColor: '#15290c',
+        shadowOpacity: 0.3,
+        shadowRadius: 7,
+        elevation: 4,
     }
 }
 
@@ -31,6 +37,13 @@ export const darkTheme = {
         background: '#040a02',
         link: '#26A96C',
         linkText: '#ffffff'
+    },
+    shadowStyle: {
+        shadowColor: '#505f50',
+        shadowOffset: {width: 0, height: 5},
+        shadowOpacity: 0.8,
+        shadowRadius: 15,
+        elevation: 4,
     }
 }
 

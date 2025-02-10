@@ -2,17 +2,9 @@ import React from "react";
 import {ActivityIndicator, Text, TouchableOpacity, View} from "react-native";
 import {useTheme} from "@react-navigation/native";
 
-export default function LoadingButton({buttonStyle, text, shadow=false, onPress, loading=false}) {
+export default function LoadingButton({buttonStyle, text, onPress, loading=false}) {
 
-    const {colors} = useTheme();
-
-    const shadowStyle = shadow? {
-        shadowColor: colors.primary,
-        shadowOffset: {width: 0, height: 5},
-        shadowOpacity: 0.2,
-        shadowRadius: 15,
-        elevation: 4,
-    } : {}
+    const {colors, shadowStyle} = useTheme();
 
     return (
         loading? (

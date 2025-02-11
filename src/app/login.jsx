@@ -10,7 +10,7 @@ import {useTheme} from "@react-navigation/native";
 
 
 export default function LoginScreen() {
-    const {colors} = useTheme();
+    const {colors, textStyle, shadowStyle} = useTheme();
 
     const emailRef = useRef('');
     const passwordRef = useRef('');
@@ -51,36 +51,37 @@ export default function LoginScreen() {
                 <TouchableOpacity onPress={()=>{ navigation.back() }}
                                   style={{backgroundColor: colors.link}}
                                   className="absolute z-10 top-3 left-3 rounded-full p-1.5">
-                    <Icon.ArrowLeft strokeWidth={3} stroke={'white'} />
+                    <Icon.ChevronLeft strokeWidth={3} stroke={colors.linkText} />
                 </TouchableOpacity>
                 <View>
-                    <Text className="text-center font-bold text-2xl">Login</Text>
+                    <Text style={textStyle} className="text-center font-bold text-2xl">Login</Text>
                 </View>
             </View>
 
             <View className='p-5'>
-                <Text className='text-3xl font-extrabold'>Hey,</Text>
-                <Text className='text-3xl font-extrabold'>Welcome back</Text>
+                <Text style={textStyle} className='text-3xl font-extrabold'>Hey,</Text>
+                <Text style={textStyle} className='text-3xl font-extrabold'>Welcome back!</Text>
 
             </View>
             <View className='p-5'>
-                <Text className='text-sm'>Please login to continue</Text>
+                <Text style={textStyle} className='text-sm'>Please enter your login details below to continue.</Text>
                 <Input
-                    icon={ <Icon.Mail size={26} strokeWidth={2}/> }
-                    placeholder='Please enter your email'
+                    icon={ <Icon.Mail size={26} strokeWidth={2} color={colors.text}/> }
+                    placeholder='Please enter your email.'
                     onChangeText={val => emailRef.current = val}
                     keyboardType="email-address"
+                    autoComplete='email'
                     autoCapitalize="none"/>
                 <Input
-                    icon={ <Icon.Lock size={26} strokeWidth={2}/> }
-                    placeholder='Please enter your password'
+                    icon={ <Icon.Lock size={26} strokeWidth={2} color={colors.text}/> }
+                    placeholder='Please enter your password.'
                     onChangeText={val => passwordRef.current = val}
                     autoCapitalize="none"
                     autoComplete='password'
                     secureTextEntry/>
                 <Pressable style={({pressed})=> [{ opacity: pressed ? 0.5 : 1.0 }]}
                            onPress={() => {}}>
-                    <Text className='text-right text-green-600 font-semibold mt-2'>Forgot password?</Text>
+                    <Text style={{color: colors.link}} className='text-right font-semibold mt-2'>Forgot password?</Text>
                 </Pressable>
 
             </View>
@@ -89,10 +90,9 @@ export default function LoginScreen() {
 
                 <LoadingButton text='Login'
                                loading={isLoading}
-                               onPress={handleLogin}
-                               shadow={true}/>
+                               onPress={handleLogin} />
                 <TouchableOpacity
-                    className='border border-gray-500 bg-white py-4 my-10 bottom-2 justify-items-center rounded-3xl'
+                    style={shadowStyle} className='bg-white py-4 my-10 bottom-2 justify-items-center rounded-3xl'
                     onPress={() => {}}>
 
                     <Text className='text-center m-1 font-semibold'>Sign in with Google</Text>
@@ -103,12 +103,12 @@ export default function LoginScreen() {
             <View className='mt-auto mb-3 px-4'>
 
                 <View className='flex-row items-center justify-center'>
-                    <Text>
+                    <Text style={{color: colors.text}}>
                         Don't have an account?
                     </Text>
                     <Pressable style={({pressed}) => [{opacity: pressed ? 0.5 : 1.0 }]}
                                onPress={() => navigation.dismissTo('/signup')}>
-                        <Text className=' font-semibold text-green-600 m-1'>Sign up</Text>
+                        <Text style={{color: colors.link}} className='font-semibold m-1'>Sign up</Text>
                     </Pressable>
                 </View>
             </View>

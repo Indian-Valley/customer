@@ -61,7 +61,7 @@ export default function AccountScreen() {
                     <Text style={{color: colors.text}} className='p-1'>{`${user?.default_address}`}</Text>
                 </View>
 
-                <LoadingButton text='Logout' onPress={onLogout} shadow={true} />
+                <LoadingButton text='Logout' onPress={onLogout}/>
 
             </View>
 

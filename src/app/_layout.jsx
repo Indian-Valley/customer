@@ -8,7 +8,7 @@ import ApiManager from "../apiManager/apiManager";
 import { lightTheme, darkTheme } from "../theme"
 
 import {useColorScheme} from "nativewind";
-import {ThemeProvider} from "@react-navigation/native";
+import {ThemeProvider, useTheme} from "@react-navigation/native";
 
 
 export const unstable_settings = {
@@ -33,6 +33,7 @@ export default function _layout() {
 
 function MainLayout() {
     const {colorScheme, setColorScheme} = useColorScheme();
+    const {colors} = useTheme()
     console.log(colorScheme)
 
     const {user, setAuth, setUserData} = useAuth()

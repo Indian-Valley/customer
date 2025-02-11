@@ -9,9 +9,9 @@ import LoadingButton from "../components/LoadingButton";
 import {useTheme} from "@react-navigation/native";
 
 
-export default function LoginScreen() {
+export default function SignUpScreen() {
 
-    const {colors} = useTheme();
+    const {colors, textStyle, shadowStyle} = useTheme();
 
     const firstNameRef = useRef('');
     const lastNameRef = useRef('');
@@ -65,67 +65,61 @@ export default function LoginScreen() {
                 <TouchableOpacity onPress={()=>{ navigation.back() }}
                                   style={{backgroundColor: colors.link}}
                                   className="absolute z-10 top-3 left-3 rounded-full p-1.5">
-                    <Icon.ArrowLeft strokeWidth={3} stroke={'white'} />
+                    <Icon.ChevronLeft strokeWidth={3} stroke={colors.linkText} />
                 </TouchableOpacity>
                 <View>
-                    <Text className="text-center font-bold text-2xl">Sign up</Text>
+                    <Text style={textStyle} className="text-center font-bold text-2xl">Sign up</Text>
                 </View>
             </View>
 
-            <ScrollView>
-                <View className='p-5'>
-                    <Text className='text-3xl font-extrabold'>Let's</Text>
-                    <Text className='text-3xl font-extrabold'>Get Started</Text>
+            <ScrollView className='p-5'>
+                <View>
+                    <Text style={textStyle} className='text-3xl font-extrabold'>Let's</Text>
+                    <Text style={textStyle} className='text-3xl font-extrabold'>Get Started</Text>
 
                 </View>
-                <View className='p-5'>
-                    <Text className='text-sm'>Please fill in your details to create an account.</Text>
+                <View className='pt-5'>
+                    <Text style={textStyle} className='text-sm'>Please fill in your details to create an account.</Text>
 
                     <Input
-                        icon={ <Icon.User size={26} strokeWidth={2}/> }
+                        icon={ <Icon.User size={26} strokeWidth={2} color={colors.text}/> }
                         placeholder='Please enter your first name'
                         onChangeText={val => firstNameRef.current = val}
                         autoCapitalize="words"
                         autoComplete="given-name"/>
                     <Input
-                        icon={ <Icon.User size={26} strokeWidth={2}/> }
+                        icon={ <Icon.User size={26} strokeWidth={2} color={colors.text}/> }
                         placeholder='Please enter your last name'
                         onChangeText={val => lastNameRef.current = val}
                         autoCapitalize="words"
                         autoComplete="family-name"/>
                     <Input
-                        icon={ <Icon.Mail size={26} strokeWidth={2}/> }
+                        icon={ <Icon.Mail size={26} strokeWidth={2} color={colors.text}/> }
                         placeholder='Please enter your email'
                         onChangeText={val => emailRef.current = val}
                         keyboardType="email-address"
                         autoCapitalize="none"
                         autoComplete='email'/>
                     <Input
-                        icon={ <Icon.Phone size={26} strokeWidth={2}/> }
+                        icon={ <Icon.Phone size={26} strokeWidth={2} color={colors.text}/> }
                         placeholder='Please enter a mobile number'
                         onChangeText={val => phoneRef.current = val}
                         keyboardType="number-pad"
                         autoComplete='tel'/>
                     <Input
-                        icon={ <Icon.Lock size={26} strokeWidth={2}/> }
+                        icon={ <Icon.Lock size={26} strokeWidth={2} color={colors.text}/> }
                         placeholder='Please enter a password'
                         onChangeText={val => passwordRef.current = val}
                         autoCapitalize="none"
                         autoComplete="new-password"
                         secureTextEntry/>
-                    <Pressable style={({pressed})=> [{ opacity: pressed ? 0.5 : 1.0 }]}
-                               onPress={() => {}}>
-                        <Text className='text-right font-semibold mt-2'>Forgot password?</Text>
-                    </Pressable>
 
                 </View>
 
-
-                <View className='mx-5'>
+                <View className='mt-10'>
                     <LoadingButton text='Sign Up'
                                    loading={isLoading}
-                                   onPress={handleSignUp}
-                                   shadow={true}/>
+                                   onPress={handleSignUp}/>
                     <TouchableOpacity
                         className='border border-gray-500 bg-white py-4 my-10 bottom-2 justify-items-center rounded-3xl'
                         onPress={() => {}}>
@@ -134,17 +128,13 @@ export default function LoginScreen() {
                     </TouchableOpacity>
                 </View>
 
-
-                <View className=' px-4'>
-
-                    <View className='flex-row items-center justify-center gap-1'>
-                        <Text>
-                            Already have an account?
-                        </Text>
-                        <Pressable onPress={() => navigation.dismissTo('/login')}>
-                            <Text className='text-green-600 font-semibold m-1'>Login</Text>
-                        </Pressable>
-                    </View>
+                <View className='flex-row items-center justify-center gap-1'>
+                    <Text style={textStyle}>
+                        Already have an account?
+                    </Text>
+                    <Pressable onPress={() => navigation.dismissTo('/login')}>
+                        <Text style={{color:colors.link}} className='font-semibold m-1'>Login</Text>
+                    </Pressable>
                 </View>
             </ScrollView>
         </SafeAreaView>

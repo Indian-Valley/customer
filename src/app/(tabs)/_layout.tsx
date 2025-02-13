@@ -16,6 +16,7 @@ export default function Layout() {
             <Tabs.Screen name="home"
                          options={{
                              title: "Home",
+                             href: '/home',
                              tabBarIcon: ({color}) => <FontAwesome size={24} name="home" color={color}/>,
                          }}
 
@@ -23,12 +24,14 @@ export default function Layout() {
             <Tabs.Screen name="offers"
                          options={{
                              title: "Offers",
+                             href: './offers',
                              tabBarIcon: ({color}) => <FontAwesome size={24} name="money" color={color} />,
                          }}
             />
-            <Tabs.Screen name="(order)"
+            <Tabs.Screen name="order"
                          options={{
                              title: "Order",
+                             href: './order',
                              tabBarIcon: ({color}) => <FontAwesome size={22} name="shopping-bag" color={color} />,
                              tabBarBadge: cartItems.length > 0? cartItems.length : undefined,
                              tabBarBadgeStyle: {
@@ -39,14 +42,22 @@ export default function Layout() {
             <Tabs.Screen name="feed"
                          options={{
                              title: "Feed",
+                             href: './feed',
                              tabBarIcon: ({color}) => <FontAwesome size={24} name="newspaper-o" color={color} />,
+                         }}
+            />
+            <Tabs.Screen name="order-history"
+                         options={{
+                             title: "Previous",
+                             href: './order-history',
+                             tabBarIcon: ({color}) => <FontAwesome size={24} name="history" color={color} />,
                          }}
             />
             <Tabs.Screen name="account"
                          options={{
                              title: "Account",
-                             tabBarIcon: ({color}) => <FontAwesome size={24} name="user-o" color={color} />,
-                         }}
+                             href: null
+            }}
             />
         </Tabs>
     );

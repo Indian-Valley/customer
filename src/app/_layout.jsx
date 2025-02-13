@@ -36,21 +36,23 @@ function MainLayout() {
     const {colors} = useTheme()
     console.log(colorScheme)
 
-    const {user, setAuth, setUserData} = useAuth()
+    const {user, setAuth, setUserData, setUserDataLoading} = useAuth()
     const router = useRouter();
 
     const updateUserData = async (user) => {
-        let res = await ApiManager.getCustomerDetails(user?.id)
-        // console.log(res)
+        setUserDataLoading(true);
+        let res = await ApiManager.getCustomerDetails(user.id)
+        console.log('Fetched User Data:', res)
         if (res) {
             setUserData({...user, ...res})
             // console.log('user: ', user)
         }
+        setUserDataLoading(false);
     }
 
     useEffect(() => {
         supabase.auth.onAuthStateChange((_event, session) => {
-            // console.log(_event, session);
+            console.log(_event, session);
             if (session) {
                 setAuth(session?.user);
                 updateUserData(session?.user);

@@ -34,12 +34,13 @@ export const lightTheme = {
         primaryTransparent: (opacity) => `rgba(43, 77, 23, ${opacity})`,
         background: themeColors.background,
         link: themeColors.action,
-        linkText: '#ffffff'
+        linkText: '#ffffff',
+        danger: '#CD5C5C'
     },
     shadowStyle: StyleSheet.create({
         shadowColor: '#15290c',
-        shadowOpacity: 0.3,
-        shadowRadius: 7,
+        shadowOpacity: 0.2,
+        shadowRadius: 10,
         elevation: 4,
     }),
     textStyle: StyleSheet.create({
@@ -60,13 +61,13 @@ export const darkTheme = {
         primaryTransparent: (opacity) => `rgba(185, 185, 185, ${opacity})`,
         background: themeColors.backgroundDark,
         link: themeColors.action,
-        linkText: '#ffffff'
+        linkText: '#ffffff',
+        danger: '#DC143C'
     },
     shadowStyle: StyleSheet.create({
         shadowColor: '#505f50',
-        shadowOffset: {width: 0, height: 5},
-        shadowOpacity: 0.8,
-        shadowRadius: 15,
+        shadowOpacity: 0.4,
+        shadowRadius: 10,
         elevation: 4,
     }),
     textStyle: StyleSheet.create({

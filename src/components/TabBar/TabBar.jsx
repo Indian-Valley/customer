@@ -24,43 +24,47 @@ export default function TabBar({ state, descriptors, navigation }) {
         >
             {state.routes.map((route, i) => {
                 const {options} = descriptors[route.key]
-                const label =
-                    options.tabBarLabel !== undefined ? options.tabBarLabel :
-                    options.title !== undefined? options.title :
-                    route.name
 
-                const onPress = () => {
-                    const event = navigation.emit({
-                        type: 'tabPress',
-                        target: route.key,
-                        canPreventDefault: true
-                    })
+                if (options?.tabBarIcon !== undefined) {
 
-                    if (!isFocused && !event.defaultPrevented) {
-                        navigation.navigate(route.name, route.params)
+                    const label =
+                        options.tabBarLabel !== undefined ? options.tabBarLabel :
+                        options.title !== undefined? options.title :
+                        route.name
+
+                    const onPress = () => {
+                        const event = navigation.emit({
+                            type: 'tabPress',
+                            target: route.key,
+                            canPreventDefault: true
+                        })
+
+                        if (!isFocused && !event.defaultPrevented) {
+                            navigation.navigate(route.name, route.params)
+                        }
                     }
+
+                    const onLongPress = () => {
+                        navigation.emit({
+                            type: 'tabLongPress',
+                            target: route.key,
+                        })
+                    }
+
+                    const isFocused = state.index === i
+
+                    return (
+                        <TabBarButton key={label}
+                                      label={label}
+                                      tabBarIcon={options.tabBarIcon}
+                                      tabBarBadge={options.tabBarBadge}
+                                      tabBarBadgeStyle={options.tabBarBadgeStyle}
+                                      onPress={onPress}
+                                      onLongPress={onLongPress}
+                                      isFocused={isFocused} />
+                    );
+
                 }
-
-                const onLongPress = () => {
-                    navigation.emit({
-                        type: 'tabLongPress',
-                        target: route.key,
-                    })
-                }
-
-                const isFocused = state.index === i
-
-                return (
-                    <TabBarButton key={label}
-                                  label={label}
-                                  tabBarIcon={options.tabBarIcon}
-                                  tabBarBadge={options.tabBarBadge}
-                                  tabBarBadgeStyle={options.tabBarBadgeStyle}
-                                  onPress={onPress}
-                                  onLongPress={onLongPress}
-                                  isFocused={isFocused}/>
-                );
-
             })}
         </View>
     )

@@ -11,7 +11,7 @@ export default function FeaturedRow({title, description, items}) {
             <View className="flex-row justify-between items-center px-4 py-2">
                 <View>
                     <Text style={{color: colors.text}} className="font-bold text-xl">{title}</Text>
-                    <Text style={{color: colors.text}} className="font-gray-500 text-sm">{description}</Text>
+                    <Text style={{color: colors.text}} className="text-sm">{description}</Text>
                 </View>
                 <TouchableOpacity onPress={() => {}}>
                     <Text style={{color: colors.link}} className="font-semibold">See All</Text>
@@ -19,7 +19,7 @@ export default function FeaturedRow({title, description, items}) {
             </View>
             <ScrollView horizontal={true}
                         showsHorizontalScrollIndicator={false}
-                        contentContainerStyle={{paddingHorizontal: 15}}>
+                        className='px-4 py-8 -my-4'>
                 {
                     items.map((item, index) => (
                         <ItemCard item={item} key={index} />

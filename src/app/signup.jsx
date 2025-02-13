@@ -7,6 +7,7 @@ import {useRouter} from "expo-router";
 import Input from "../components/Input";
 import LoadingButton from "../components/LoadingButton";
 import {useTheme} from "@react-navigation/native";
+import Header from "../components/Header";
 
 
 export default function SignUpScreen() {
@@ -61,16 +62,7 @@ export default function SignUpScreen() {
 
     return (
         <SafeAreaView className="flex-1">
-            <View className="relative py-4">
-                <TouchableOpacity onPress={()=>{ navigation.back() }}
-                                  style={{backgroundColor: colors.link}}
-                                  className="absolute z-10 top-3 left-3 rounded-full p-1.5">
-                    <Icon.ChevronLeft strokeWidth={3} stroke={colors.linkText} />
-                </TouchableOpacity>
-                <View>
-                    <Text style={textStyle} className="text-center font-bold text-2xl">Sign up</Text>
-                </View>
-            </View>
+            <Header title='Sign Up' hasBack={true}/>
 
             <ScrollView className='p-5'>
                 <View>

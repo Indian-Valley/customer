@@ -10,7 +10,7 @@ export default function Input(props) {
               className='flex-row rounded-2xl items-center px-4 mt-4 w-full'>
             {props.icon? props.icon : null}
 
-            <TextInput className='p-2 m-2 items-center w-full'
+            <TextInput className='py-4 items-center ml-2 mr-0 flex-1'
                        placeholderTextColor={colors.defaultText}
                        style={textStyle}
                        {...props}/>

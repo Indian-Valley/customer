@@ -3,11 +3,11 @@ import React, { useState } from 'react';
 import {categories} from "../constants";
 import {useTheme} from "@react-navigation/native";
 
-export default function Categories({className, activeCategory, setActiveCategory}) {
+export default function Categories({activeCategory, setActiveCategory}) {
     const {colors} = useTheme();
 
     return(
-        <View className={'py-2 border-y '+className} style={{backgroundColor: colors.background, borderColor: colors.border}}>
+        <View className='py-4'>
             <ScrollView horizontal={true}
                         showsHorizontalScrollIndicator={false}
                         contentContainerStyle={{paddingHorizontal: 15}}

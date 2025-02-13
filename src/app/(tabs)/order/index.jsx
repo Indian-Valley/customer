@@ -3,6 +3,7 @@ import {SafeAreaView, Text, TextInput, TouchableOpacity, View} from "react-nativ
 import LoadingButton from "../../../components/LoadingButton";
 import React, {useState} from "react";
 import {useTheme} from "@react-navigation/native";
+import Header from "../../../components/Header";
 
 export default function OrderScreen() {
 
@@ -13,7 +14,8 @@ export default function OrderScreen() {
     const navigation = useRouter();
 
     return (
-        <SafeAreaView>
+        <SafeAreaView className="flex-1">
+            <Header title='Order' showAccount={true}/>
 
             <View className='shadow-2xl rounded-3xl mx-3'>
 
@@ -65,7 +67,7 @@ export default function OrderScreen() {
 
                     <LoadingButton text='Next'
                                    loading={false}
-                                   onPress={() => navigation.navigate('/menu')}
+                                   onPress={() => navigation.navigate('./menu')}
                                    shadow={true}/>
                 </View>
 

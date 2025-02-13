@@ -6,6 +6,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import FeaturedRow from "../../components/FeaturedRow";
 import { featured } from "../../constants";
 import { useTheme } from "@react-navigation/native";
+import Header from "../../components/Header";
 
 export default function HomeScreen() {
 
@@ -13,7 +14,8 @@ export default function HomeScreen() {
 
     return (
 
-        <SafeAreaView>
+        <SafeAreaView className="flex-1">
+            <Header title='Home' showAccount={true}/>
             <ScrollView showsVerticalScrollIndicator={false}
                         contentContainerStyle={{paddingBottom: 20}}>
 
@@ -28,6 +30,8 @@ export default function HomeScreen() {
                         )
                     }
                 </View>
+                <View className='w-full h-32' />
+
             </ScrollView>
 
 

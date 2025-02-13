@@ -8,9 +8,9 @@ export default function ItemCard({ item }) {
     const {colors, shadowStyle} = useTheme();
 
     return (
-        <Pressable onPress={() => navigation.navigate(item.navTo)}>
+        <Pressable className='-m-2 px-4' onPress={() => navigation.navigate(item.navTo)}>
             <View style={[{backgroundColor: colors.card}, shadowStyle]}
-                  className="mr-6 mb-5 w-64 rounded-3xl">
+                  className="w-64 rounded-3xl">
 
                 <Image className="h-36 w-64 rounded-t-3xl" source={item.image} />
                 <View className="px-3 pb-4 space-y-2">

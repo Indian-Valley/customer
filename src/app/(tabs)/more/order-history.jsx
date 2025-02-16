@@ -12,12 +12,12 @@ export default function OrderHistoryScreen() {
 
     const navigation = useRouter();
     return (
-        <SafeAreaView className="flex-1">
+        <View className="flex-1">
             <Header title='Previous Orders' showAccount={true}/>
             <ScrollView>
 
 
             </ScrollView>
-        </SafeAreaView>
+        </View>
     )
 }

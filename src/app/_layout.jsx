@@ -54,9 +54,11 @@ function MainLayout() {
         supabase.auth.onAuthStateChange((_event, session) => {
             console.log(_event, session);
             if (session) {
-                setAuth(session?.user);
-                updateUserData(session?.user);
-                router.replace("/home");
+                if (_event === 'INITIAL_SESSION') {
+                    setAuth(session?.user);
+                    updateUserData(session?.user);
+                    router.replace("/home");
+                }
             } else {
                 setAuth(null);
                 router.replace("/welcome");
@@ -75,6 +77,8 @@ function MainLayout() {
                     <Stack.Screen name="signup" options={{title: "signup"}}/>
 
                     <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+                    <Stack.Screen name="deliver-or-collection" options={{presentation: 'transparentModal', title: "deliver-or-collection"}}/>
+
                 </Stack>
             </ThemeProvider>
         </Provider>

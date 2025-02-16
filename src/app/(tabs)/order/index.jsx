@@ -14,7 +14,7 @@ export default function OrderScreen() {
     const navigation = useRouter();
 
     return (
-        <SafeAreaView className="flex-1">
+        <View className="flex-1">
             <Header title='Order' showAccount={true}/>
 
             <View className='shadow-2xl rounded-3xl mx-3'>
@@ -67,12 +67,12 @@ export default function OrderScreen() {
 
                     <LoadingButton text='Next'
                                    loading={false}
-                                   onPress={() => navigation.navigate('./menu')}
+                                   onPress={() => navigation.navigate('/order/menu')}
                                    shadow={true}/>
                 </View>
 
 
             </View>
-        </SafeAreaView>
+        </View>
     )
 }

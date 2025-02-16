@@ -1,9 +1,8 @@
-import {View, Text, SafeAreaView, ScrollView, TouchableOpacity} from 'react-native';
+import {View, ScrollView } from 'react-native';
 import React from 'react'
-import * as Icon from "react-native-feather"
 import { useRouter} from "expo-router";
 import {useTheme} from "@react-navigation/native";
-import Header from "../../components/Header";
+import Header from "../../../components/Header";
 
 
 export default function OrderHistoryScreen() {
@@ -13,7 +12,7 @@ export default function OrderHistoryScreen() {
     const navigation = useRouter();
     return (
         <View className="flex-1">
-            <Header title='Previous Orders' showAccount={true}/>
+            <Header title='Previous Orders' hasBack={true} showAccount={true}/>
             <ScrollView>
 
 

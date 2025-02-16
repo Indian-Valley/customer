@@ -1,8 +1,7 @@
-import {View, Text, SafeAreaView, ScrollView, TouchableOpacity} from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 import React from 'react'
-import * as Icon from "react-native-feather"
-import { useRouter} from "expo-router";
-import {useTheme} from "@react-navigation/native";
+import { useRouter } from "expo-router";
+import { useTheme } from "@react-navigation/native";
 import Header from "../../components/Header";
 
 
@@ -12,7 +11,7 @@ export default function OffersScreen() {
 
     const navigation = useRouter();
     return (
-        <SafeAreaView className="flex-1">
+        <View className="flex-1">
             <Header title='Special Offers' showAccount={true}/>
 
             <ScrollView>
@@ -23,6 +22,6 @@ export default function OffersScreen() {
                 </View>
 
             </ScrollView>
-        </SafeAreaView>
+        </View>
     )
 }

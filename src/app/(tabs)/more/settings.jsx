@@ -1,98 +1,223 @@
-import React, {useRef, useState} from 'react'
-import {ActivityIndicator, SafeAreaView, ScrollView, Text, TouchableOpacity, View} from "react-native";
-import {useTheme} from "@react-navigation/native";
-import Input from "../../components/Input";
-import * as Icon from "react-native-feather";
-import LoadingButton from "../../components/LoadingButton";
-import {useRouter} from "expo-router";
-import {useAuth} from "../../contexts/AuthContexts";
-import {ListItem} from "@rneui/themed";
+import React, { useCallback, useState } from 'react'
+import {
+    ActivityIndicator,
+    Alert, FlatList,
+    Pressable,
+    SafeAreaView,
+    ScrollView,
+    Text,
+    TouchableOpacity,
+    TouchableHighlight,
+    View
+} from "react-native";
+import {
+    ListItem,
+    Avatar,
+    Icon,
+    Badge,
+    ListItemProps,
+    Button,
+    Switch,
+    CheckBox,
+    lightColors, ButtonGroup
+} from '@rneui/themed';
 
-export default function EditDataScreen({firstName, lastName, email, mobile}) {
+import { useRouter } from "expo-router";
+import {supabase} from "../../../lib/supabase";
+import LoadingButton from "../../../components/LoadingButton";
+
+import { get, save } from '../../../storage';
+import {useTheme} from "@react-navigation/native";
+import {useColorScheme} from "nativewind";
+import {useAuth} from "../../../contexts/AuthContexts";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
+import Header from "../../../components/Header";
+
+export default function SettingsScreen() {
 
     const navigation = useRouter();
-    const {user, userDataLoading} = useAuth()
+    const {colors, shadowStyle, textStyle} = useTheme()
+    const {colorScheme, setColorScheme} = useColorScheme();
 
-    const {colors, textStyle} = useTheme()
+    const [notificationsEnabled, setNotificationsEnabled] = React.useState(true);
+    const [notificationsOrderStatus, setNotificationsOrderStatus] = React.useState(true);
+    const [notificationsOffers, setNotificationsOffers] = React.useState(true);
+    const [notificationsOther, setNotificationsOther] = React.useState(true);
 
-    const [loading, setLoading] = useState(false);
-
-    const firstNameRef = useRef(user.first_names);
-    const lastNameRef = useRef('');
-    const emailRef = useRef(user.email);
-    const phoneRef = useRef('');
-    const passwordRef = useRef('');
-    const newPasswordRef = useRef('');
-
-    const onSubmit = () => {
-
+    const handleNotificationsEnabled = (value) => {
+        setNotificationsEnabled(value);
+        // TODO: save to settings
     }
+    const handleNotificationsOrderStatus = (value) => {
+        setNotificationsOrderStatus(value);
+        // TODO: save to settings
+    }
+    const handleNotificationsOffers = (value) => {
+        setNotificationsOffers(value);
+        // TODO: save to settings
+    }
+    const handleNotificationsOther = (value) => {
+        setNotificationsOther(value);
+        // TODO: save to settings
+    }
+
+    const [themeToggle, setThemeToggle] = useState(true);
+    const [darkModeToggle, setDarkModeToggle] = useState(true);
+    const [selectedButtonIndex, setSelectedButtonIndex] = useState(0);
+    const [selectedTheme, setSelectedTheme] = useState(colorScheme);
+
+    const onReset = async () => {
+        Alert.alert('Confirm', 'Are you sure you want to clear your settings?', [
+            {
+                text: 'Cancel',
+                onPress: () => {},
+                style: 'cancel'
+            }, {
+                text: 'Reset',
+                onPress: () => {
+
+                },
+                style: 'destructive'
+            },
+        ]);
+    }
+
+    const toggleTheme = (theme) => {
+        setSelectedTheme(theme);
+        setColorScheme(theme);
+    }
+
+    const notificationTypes = [
+        {title: 'Order Status Notifications', value: notificationsOrderStatus, onPress: (value) => handleNotificationsOrderStatus(value)},
+        {title: 'Special Offers Notifications', value: notificationsOffers, onPress: (value) => handleNotificationsOffers(value)},
+        {title: 'Other Notifications', value: notificationsOther, onPress: (value) => handleNotificationsOther(value)},
+    ]
+
     return (
-        <View>
-            <View className="relative py-4">
-                <TouchableOpacity onPress={()=>{ navigation.back() }}
-                                  style={{backgroundColor: colors.link}}
-                                  className="absolute z-10 top-3 left-3 rounded-full p-1.5">
-                    <Icon.ChevronLeft strokeWidth={3} stroke={colors.linkText} />
-                </TouchableOpacity>
-                <View>
-                    <Text style={textStyle} className="text-center font-bold text-2xl">Edit Details</Text>
+        <View className='flex-1'>
+            <Header title='Settings' hasBack={true} padding={4}/>
+
+            <ScrollView showsVerticalScrollIndicator={false}>
+
+                <View className='border-y border-gray-500 mt-4'>
+
+                    <ListItem onPress={onReset}
+                              Component={TouchableOpacity}
+                              containerStyle={{backgroundColor: colors.card, padding: 16}}>
+                        <Icon name='settings-backup-restore' size={30} color={colors.defaultText}/>
+                        <ListItem.Content>
+                            <ListItem.Title style={textStyle}>Reset Settings</ListItem.Title>
+                        </ListItem.Content>
+
+                    </ListItem>
                 </View>
-            </View>
 
-            <ScrollView>
+                {/* Theme */}
 
-                { userDataLoading ? (
-                    <View className={'flex-row justify-center bottom-2 rounded-3xl mx-auto py-4'}>
-                        <ActivityIndicator className='m-4'
-                                           size='large'/>
-                    </View>
-                ) : (<>
+                <View className='border-y border-gray-500 mt-4'>
+                    <ListItem onPress={() => {}}
+                              Component={TouchableHighlight}
+                              containerStyle={{backgroundColor: colors.card}}
+                              bottomDivider>
+                        <ListItem.Content>
+                            <ListItem.Title style={textStyle}>Set App Theme</ListItem.Title>
+                        </ListItem.Content>
+                        <Switch color={colors.link}
+                                value={themeToggle}
+                                onValueChange={(value) => {
+                                    setThemeToggle(value)
+                                    toggleTheme(value? (darkModeToggle? 'dark' : 'light') : 'system')
+                                }}/>
+                    </ListItem>
 
-                <ListItem onPress={() => {}}
-                          bottomDivider
-                          containerStyle={{backgroundColor: colors.background}}>
-                    <ListItem.Content>
-                        <ListItem.Title style={textStyle}>Forename</ListItem.Title>
-                    </ListItem.Content>
-                    <ListItem.Input placeholder={user.first_names? user.first_names : 'Enter Forename...'} style={textStyle}/>
-                    <ListItem.Chevron />
-                </ListItem>
-                <ListItem onPress={() => {}}
-                          bottomDivider
-                          containerStyle={{backgroundColor: colors.background}}>
-                    <ListItem.Content>
-                        <ListItem.Title style={textStyle}>Surname</ListItem.Title>
-                    </ListItem.Content>
+                    <ListItem onPress={() => {}}
+                              containerStyle={{backgroundColor: colors.card}}
+                              bottomDivider>
+                        <ListItem.Content>
+                            <ListItem.Title style={textStyle}>Dark Mode</ListItem.Title>
+                        </ListItem.Content>
+                        <ListItem.Content
+                            disabled={!themeToggle}
+                            right>
+                            <Switch color={colors.link}
+                                    value={darkModeToggle}
+                                    disabled={!themeToggle}
+                                    onValueChange={(value) => {
+                                        setDarkModeToggle(value)
+                                        toggleTheme(value? 'dark' : 'light')
+                                    }}/>
+                        </ListItem.Content>
+                    </ListItem>
 
-                    <ListItem.Input placeholder={user.last_name? user.last_name : 'Enter Surname...'} style={textStyle}/>
-                    <ListItem.Chevron />
+                </View>
 
-                </ListItem>
-                <ListItem onPress={() => {}}
-                          bottomDivider
-                          containerStyle={{backgroundColor: colors.background}}>
-                    <ListItem.Content>
-                        <ListItem.Title  style={textStyle}>Contact Number</ListItem.Title>
-                    </ListItem.Content>
-                    <ListItem.Subtitle style={textStyle}>
-                        {`${user?.tel}`}
-                    </ListItem.Subtitle>
-                </ListItem>
-                <ListItem onPress={() => {}}
-                          bottomDivider
-                          containerStyle={{backgroundColor: colors.background}}>
-                    <ListItem.Content>
-                        <ListItem.Title style={textStyle}>Email</ListItem.Title>
-                    </ListItem.Content>
-                    <ListItem.Title style={textStyle}>
-                        {user?.email}
-                    </ListItem.Title>
-                </ListItem>
-                </>)}
+                {/* Notification */}
+                <View className='border-y border-gray-500 mt-4'>
+                    <ListItem.Accordion content={<>
+                        <ListItem.Content>
+                            <ListItem.Title style={textStyle}>Allow Notifications</ListItem.Title>
+                        </ListItem.Content>
+                        <Switch
+                            value={notificationsEnabled}
+                            onValueChange={(value) => handleNotificationsEnabled(value)}
+                            color={colors.link}
+                        />
+                    </>}
+                                        containerStyle={{backgroundColor: colors.card, padding: 16}}
+                                        isExpanded={notificationsEnabled}
+                                        icon={<Icon name="bell" type='feather' size={30} color={colors.text}/>}
+                                        expandIcon={<Icon name="bell-off" type='feather' size={30} color={colors.text}/>}
+                                        noRotation bottomDivider>
 
+                        {notificationTypes.map((item, index) => (
+                            <ListItem key={index}
+                                      onPress={() => {}}
+                                      containerStyle={{backgroundColor: colors.card}}
+                                      bottomDivider>
+                                <ListItem.Content>
+                                    <ListItem.Title style={textStyle}>{item.title}</ListItem.Title>
+                                </ListItem.Content>
+                                <ListItem.Content right>
+                                    <Switch color={colors.link}
+                                            value={item.value}
+                                            onValueChange={(value) => item.onPress(value)}/>
+                                </ListItem.Content>
+                            </ListItem>
+                        ))}
+
+                        <ListItem onPress={() => {}}
+                                  containerStyle={{backgroundColor: colors.background}}
+                                  bottomDivider>
+                            <ListItem.Content>
+                                <ListItem.Title style={textStyle}>Notification Type</ListItem.Title>
+                            </ListItem.Content>
+                            <ListItem.ButtonGroup buttons={['Sound', 'Vibrate']}
+                                                  buttonStyle={{backgroundColor: colors.card}}
+                                                  selectedButtonStyle={{backgroundColor: colors.link}}
+                                                  selectedIndex={selectedButtonIndex}
+                                                  onPress={(index) => setSelectedButtonIndex(index)}/>
+                        </ListItem>
+                    </ListItem.Accordion>
+
+                    <Text style={textStyle} className='my-1'>Allow Notifications Sound</Text>
+                    <Text style={textStyle} className='my-1'>Notification Frequency</Text>
+
+                </View>
+
+                {/* Feed */}
+                <View className='border-b border-gray-500 p-3'>
+
+                    <Text style={{color: colors.text}} className='text-xl font-extrabold my-2 p-1'>Feed</Text>
+                    <Text style={textStyle} className='my-1'>Show Feed</Text>
+                    <Text style={textStyle} className='my-1'>Feed Notifications</Text>
+
+                    <Text style={textStyle} className='my-1'>Feed auto-update frequency</Text>
+
+
+                </View>
+
+                <View className='w-full h-32' />
             </ScrollView>
-
         </View>
     )
 }

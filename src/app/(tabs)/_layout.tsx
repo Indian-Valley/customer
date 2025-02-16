@@ -5,9 +5,9 @@ import {selectCartItems} from "@/src/slices/cartSlice";
 import {useSelector} from "react-redux";
 import {useTheme} from "@react-navigation/native";
 import TabBar from "@/src/components/TabBar/TabBar";
+import {Icon} from "@rneui/themed";
 
 export default function Layout() {
-    const {colors} = useTheme()
 
     const cartItems = useSelector(selectCartItems);
 
@@ -16,7 +16,6 @@ export default function Layout() {
             <Tabs.Screen name="home"
                          options={{
                              title: "Home",
-                             href: '/home',
                              tabBarIcon: ({color}) => <FontAwesome size={24} name="home" color={color}/>,
                          }}
 
@@ -24,20 +23,24 @@ export default function Layout() {
             <Tabs.Screen name="offers"
                          options={{
                              title: "Offers",
-                             href: './offers',
                              tabBarIcon: ({color}) => <FontAwesome size={24} name="money" color={color} />,
                          }}
             />
             <Tabs.Screen name="order"
                          options={{
                              title: "Order",
-                             href: './order',
                              tabBarIcon: ({color}) => <FontAwesome size={22} name="shopping-bag" color={color} />,
                              tabBarBadge: cartItems.length > 0? cartItems.length : undefined,
                              tabBarBadgeStyle: {
                                  backgroundColor: 'green'
                              }
                          }}
+                         listeners={({ navigation}) => ({
+                             tabPress: (e) => {
+                                 e.preventDefault();
+                                 navigation.navigate("deliver-or-collection");
+                             }
+                         })}
             />
             <Tabs.Screen name="feed"
                          options={{
@@ -46,18 +49,12 @@ export default function Layout() {
                              tabBarIcon: ({color}) => <FontAwesome size={24} name="newspaper-o" color={color} />,
                          }}
             />
-            <Tabs.Screen name="order-history"
+            <Tabs.Screen name="more"
                          options={{
-                             title: "Previous",
-                             href: './order-history',
-                             tabBarIcon: ({color}) => <FontAwesome size={24} name="history" color={color} />,
+                             title: "Options",
+                             tabBarIcon: ({color}) => <Icon name='more-horiz' size={30} color={color}/>
+                             ,
                          }}
-            />
-            <Tabs.Screen name="account"
-                         options={{
-                             title: "Account",
-                             href: null
-            }}
             />
         </Tabs>
     );

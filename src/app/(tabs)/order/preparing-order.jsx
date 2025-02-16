@@ -37,10 +37,10 @@ export default function OrderPreparingScreen() {
             const res = await ApiManager.newOrder("Mumin", orderItems, cartTotal, false, "22:22:11", "cash");
             console.log('res', res)
             if (res?.success) {
-                navigation.replace("/order-confirmation")
+                navigation.replace("/order/order-confirmation")
             } else {
                 console.log("error: ", res?.error)
-                navigation.replace("/order-error")
+                navigation.replace("/order/order-error")
             }
         }
         postOrderToServer()

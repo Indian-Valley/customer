@@ -1,7 +1,6 @@
 import React from 'react'
 
 import { View, ScrollView } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 import FeaturedRow from "../../components/FeaturedRow";
 import { featured } from "../../constants";
@@ -14,7 +13,7 @@ export default function HomeScreen() {
 
     return (
 
-        <SafeAreaView className="flex-1">
+        <View className="flex-1">
             <Header title='Home' showAccount={true}/>
             <ScrollView showsVerticalScrollIndicator={false}
                         contentContainerStyle={{paddingBottom: 20}}>
@@ -35,6 +34,6 @@ export default function HomeScreen() {
             </ScrollView>
 
 
-        </SafeAreaView>
+        </View>
     )
 }

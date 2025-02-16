@@ -10,6 +10,8 @@ import {menu} from "../../../constants";
 import Input from "../../../components/Input";
 import MenuDivider from "../../../components/MenuDivider";
 import {useSafeAreaInsets} from "react-native-safe-area-context";
+import Header from "../../../components/Header";
+import {Divider} from "@rneui/themed";
 
 export default function MenuScreen() {
     const { width, height } = Dimensions.get('window');
@@ -61,20 +63,26 @@ export default function MenuScreen() {
     }
 
     return (
-        <SafeAreaView>
+        <View>
 
-            <View style={{marginTop:insets.top}} className="w-full h-96 -z-10 absolute">
+            <View style={{marginTop:insets.top}} className="w-full h-96 -z-50 absolute">
                 <Image className='object-contain' style={{flex: 1, width: undefined, height: undefined}}
                        source={require('@/assets/images/order-banner.jpg')}/>
             </View>
+
+            <View className='w-full z-40'>
+                <Header title='Menu' hasBack={true} showAccount={true}/>
+            </View>
             <ScrollView ref={scrollRef}
                         showsVerticalScrollIndicator={false}
-                        stickyHeaderIndices={[2]} >
+                        bounces={false}
+                        stickyHeaderIndices={[ 2]}>
+
 
                 <View className='w-full h-72' />
 
                 <View style={{borderTopLeftRadius: 40, borderTopRightRadius: 40, backgroundColor: colors.background}}
-                      className="-mt-5 p-4 z-20">
+                      className="-mt-5 p-4 z-30">
                     <Text style={{color: colors.text}} className="text-3xl py-4 font-bold text-center">Menu</Text>
 
                     <MenuDivider/>
@@ -85,7 +93,7 @@ export default function MenuScreen() {
                     </Text>
                 </View>
 
-                <View style={[{backgroundColor: colors.background}, shadowStyle]} className='z-10'>
+                <View style={[{backgroundColor: colors.background}, shadowStyle]} className='z-20'>
                     <View className='mx-4'>
                         <Input
                             icon={ <Icon.Search size={26} strokeWidth={2} color={colors.text}/> }
@@ -102,8 +110,9 @@ export default function MenuScreen() {
                 {
                     getFilteredMenu().map((category) => (
                         <React.Fragment key={category.category} >
-                        <View style={{backgroundColor: colors.background}}>
-                            <Text id={category.category} style={textStyle} className="text-2xl font-bold p-3">{category.id + '. ' + category.category}</Text>
+                        <View style={{backgroundColor: colors.background}} className='py-4'>
+                            <Text id={category.category} style={textStyle} className="text-2xl font-bold pb-2 text-center">{category.category}</Text>
+                            <Divider inset={true} insetType="middle" />
                         </View>
 
                         <View style={{backgroundColor: colors.background}}>
@@ -118,6 +127,7 @@ export default function MenuScreen() {
             </ScrollView>
 
             <CartIcon/>
+
             <Animated.View style={[buttonStyle, {backgroundColor: colors.link}]} className="absolute bottom-40 right-2 p-2 z-50 rounded-full">
                 <TouchableOpacity onPress={scrollToTop}>
                     <Icon.ArrowUp strokeWidth={3} height={32} width={32} stroke={colors.linkText}/>
@@ -127,7 +137,7 @@ export default function MenuScreen() {
 
 
 
-        </SafeAreaView>
+        </View>
     );
 
 }

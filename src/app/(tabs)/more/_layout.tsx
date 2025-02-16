@@ -1,12 +1,14 @@
 import { Stack } from 'expo-router';
 import React from "react";
 
-export default function AccountLayout() {
+export default function OptionsLayout() {
 
     return (
         <Stack screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="index" options={{presentation: 'fullScreenModal', title: "Account"}}/>
-            <Stack.Screen name="settings" options={{presentation: 'modal', title: "edit"}}/>
+            <Stack.Screen name="index" options={{title: "Options"}}/>
+            <Stack.Screen name="settings" options={{ title: "Settings"}}/>
+            <Stack.Screen name="order-history" options={{ title: "Order History"}}/>
+            <Stack.Screen name="account" options={{ title: "Account"}}/>
 
         </Stack>
     );

@@ -1,11 +1,11 @@
 import React, {useRef, useState} from 'react'
 import {ActivityIndicator, SafeAreaView, ScrollView, Text, TouchableOpacity, View} from "react-native";
 import {useTheme} from "@react-navigation/native";
-import Input from "../../components/Input";
+import Input from "../../../../components/Input";
 import * as Icon from "react-native-feather";
-import LoadingButton from "../../components/LoadingButton";
+import LoadingButton from "../../../../components/LoadingButton";
 import {useRouter} from "expo-router";
-import {useAuth} from "../../contexts/AuthContexts";
+import {useAuth} from "../../../../contexts/AuthContexts";
 import {ListItem} from "@rneui/themed";
 
 export default function EditDataScreen({firstName, lastName, email, mobile}) {

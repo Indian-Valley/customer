@@ -165,8 +165,8 @@ export default function SettingsScreen() {
                     </>}
                                         containerStyle={{backgroundColor: colors.card, padding: 16}}
                                         isExpanded={notificationsEnabled}
-                                        icon={<Icon name="bell" type='feather' size={30} color={colors.text}/>}
-                                        expandIcon={<Icon name="bell-off" type='feather' size={30} color={colors.text}/>}
+                                        icon={<Icon name="bell-off" type='feather' size={30} color={colors.text}/>}
+                                        expandIcon={<Icon name="bell" type='feather' size={30} color={colors.text}/>}
                                         noRotation bottomDivider>
 
                         {notificationTypes.map((item, index) => (

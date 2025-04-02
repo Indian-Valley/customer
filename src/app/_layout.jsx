@@ -9,6 +9,7 @@ import { lightTheme, darkTheme } from "../theme"
 
 import {useColorScheme} from "nativewind";
 import {ThemeProvider, useTheme} from "@react-navigation/native";
+import {BackHandler} from "react-native";
 
 
 export const unstable_settings = {
@@ -36,16 +37,16 @@ function MainLayout() {
     const {colors} = useTheme()
     console.log(colorScheme)
 
-    const {user, setAuth, setUserData, setUserDataLoading} = useAuth()
+    const { setAuth, setUserData, setUserDataLoading} = useAuth()
     const router = useRouter();
 
     const updateUserData = async (user) => {
         setUserDataLoading(true);
         let res = await ApiManager.getCustomerDetails(user.id)
-        console.log('Fetched User Data:', res)
+        console.log('Fetched User Data')
+
         if (res) {
-            setUserData({...user, ...res})
-            // console.log('user: ', user)
+            setUserData({...res, ...user, customer_id: res.id})
         }
         setUserDataLoading(false);
     }
@@ -54,7 +55,7 @@ function MainLayout() {
         supabase.auth.onAuthStateChange((_event, session) => {
             console.log(_event, session);
             if (session) {
-                if (_event === 'INITIAL_SESSION') {
+                if (_event === 'INITIAL_SESSION' || _event === 'SIGNED_IN') {
                     setAuth(session?.user);
                     updateUserData(session?.user);
                     router.replace("/home");
@@ -64,6 +65,10 @@ function MainLayout() {
                 router.replace("/welcome");
             }
         })
+
+
+        const backHandler = BackHandler.addEventListener('hardwareBackPress', () => true)
+        return () => backHandler.remove()
 
     }, []);
 
@@ -77,10 +82,10 @@ function MainLayout() {
                     <Stack.Screen name="signup" options={{title: "signup"}}/>
 
                     <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-                    <Stack.Screen name="deliver-or-collection" options={{presentation: 'transparentModal', title: "deliver-or-collection"}}/>
 
                 </Stack>
             </ThemeProvider>
         </Provider>
     )
 }
+

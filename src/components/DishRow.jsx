@@ -25,6 +25,7 @@ export default function DishRow({item}) {
             <Text style={{color: colors.text}} className="flex-1 pl-2 text-lg">{item.id + ' ' + item.name}</Text>
             <View className="flex-row justify-between pl-3 items-center">
                 <Text style={{color: colors.text}} className="text-md px-2 font-bold">{`£${item.price.toFixed(2)}`}</Text>
+
                 <View className="flex-row items-center">
                     {
                         (totalItems > 0)? (

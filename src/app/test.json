@@ -1,0 +1,47 @@
+{
+  "app_metadata": {
+    "provider": "email",
+    "providers": [
+      "email"
+    ]
+  },
+  "aud": "authenticated",
+  "confirmed_at": "2025-01-24T00:39:23.245918Z",
+  "created_at": "2025-01-24T00:39:23.228052Z",
+  "customer_id": 2,
+  "default_address": null,
+  "email": "muminali13@hotmail.co.uk",
+  "email_confirmed_at": "2025-01-24T00:39:23.245918Z",
+  "first_names": "Mumin",
+  "id": "cf86dbf9-15af-4d28-ad4e-047834597641",
+  "identities": [
+    {
+      "created_at": "2025-01-24T00:39:23.238717Z",
+      "email": "muminali13@hotmail.co.uk",
+      "id": "cf86dbf9-15af-4d28-ad4e-047834597641",
+      "identity_data": [
+        Object
+      ],
+      "identity_id": "b0f8b803-b76a-497a-9d9b-ccdec4625a6e",
+      "last_sign_in_at": "2025-01-24T00:39:23.238641Z",
+      "provider": "email",
+      "updated_at": "2025-01-24T00:39:23.238717Z",
+      "user_id": "cf86dbf9-15af-4d28-ad4e-047834597641"
+    }
+  ],
+  "is_anonymous": false,
+  "last_name": null,
+  "last_sign_in_at": "2025-02-17T21:20:13.034384Z",
+  "phone": "",
+  "role": "authenticated",
+  "tel": null,
+  "updated_at": "2025-02-27T12:49:04.466845Z",
+  "user_id": "cf86dbf9-15af-4d28-ad4e-047834597641",
+  "user_metadata": {
+    "email": "muminali13@hotmail.co.uk",
+    "email_verified": true,
+    "first_names": "Mumin",
+    "phone_verified": false,
+    "sub": "cf86dbf9-15af-4d28-ad4e-047834597641"
+  }
+}

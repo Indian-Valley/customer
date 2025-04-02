@@ -1,19 +1,29 @@
-import * as Icon from "react-native-feather";
-import {TouchableOpacity} from "react-native";
+import {TouchableOpacity, View} from "react-native";
 import React from "react";
 import {useRouter} from "expo-router";
 import {useTheme} from "@react-navigation/native";
+import {Icon} from "@rneui/themed";
 
-export default function BackButton() {
+export default function BackButton({show=true, backPress}) {
 
     const navigation = useRouter()
     const {colors, shadowStyle} = useTheme()
 
+    const onPress = backPress? backPress : () => {navigation.back()}
+
     return (
-        <TouchableOpacity onPress={()=>{ navigation.back() }}
-                          style={[{backgroundColor: colors.link}, shadowStyle]}
-                          className={`absolute z-10 bottom-4 left-4 rounded-full p-2`}>
-            <Icon.ChevronLeft strokeWidth={3} stroke={colors.linkText} />
-        </TouchableOpacity>
+        <>
+        {
+            show===true? (
+                <TouchableOpacity onPress={()=>{ onPress() }}
+                                  style={[{backgroundColor: colors.link}, shadowStyle]}
+                                  className='z-10 m-4 w-10 h-10 rounded-full items-center justify-center'>
+                    <Icon name='chevron-left' type='feather' size={24} color={colors.linkText}/>
+                </TouchableOpacity>
+            ) : (
+                <View className='w-10 h-10 m-4' />
+            )
+        }
+        </>
     )
 }

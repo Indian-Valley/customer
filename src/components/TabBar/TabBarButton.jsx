@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
 import Animated, {interpolate, useAnimatedStyle, useSharedValue, withSpring} from "react-native-reanimated";
-import {Pressable, Text} from "react-native";
+import {Pressable, Text, TouchableHighlight, TouchableOpacity, View} from "react-native";
 import {Badge} from "@rneui/themed";
 import {useTheme} from "@react-navigation/native";
 
@@ -29,23 +29,24 @@ export default function TabBarButton({label, isFocused, onPress, onLongPress, ta
     })
 
     return (
-        <Pressable
-            className='items-center mx-2'
+        <TouchableOpacity
             onPress={onPress}
             onLongPress={onLongPress}
             style={{flex: 1}}>
 
+            <View className='items-center mx-2 rounded-3xl'>
+                <Animated.View style={animatedIconStyle}>
+                    {tabBarIcon({color : isFocused? colors.link : colors.text})}
+                </Animated.View>
 
-            <Animated.View style={animatedIconStyle}>
-                {tabBarIcon({color : isFocused? colors.link : colors.text})}
-            </Animated.View>
+                <Animated.Text style={[{ color: isFocused? colors.link : colors.text}, animatedTextStyle]} className='text-center text-xs py-1'>{label}</Animated.Text>
 
-            <Animated.Text style={[{ color: isFocused? colors.link : colors.text}, animatedTextStyle]} className='text-center text-xs pt-1'>{label}</Animated.Text>
+                {tabBarBadge? <Badge badgeStyle={tabBarBadgeStyle}
+                                     value={tabBarBadge}
+                                     containerStyle={{ position: 'absolute', right: 0, top: 0}}
+                                     textStyle={{fontWeight: 'bold'}}/> : null}
 
-            {tabBarBadge? <Badge badgeStyle={tabBarBadgeStyle}
-                                 value={tabBarBadge}
-                                 containerStyle={{ position: 'absolute', right: 0, top: 0}}
-                                 textStyle={{fontWeight: 'bold'}}/> : null}
-        </Pressable>
+            </View>
+        </TouchableOpacity>
     )
 }

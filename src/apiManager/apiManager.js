@@ -13,8 +13,8 @@ class ApiManager {
         return APIMethods.get(ENDPOINTS.SPECIFIC_ORDER(id));
     }
 
-    static newOrder = (customer_name, items, total_price, is_delivery, target_time, payment_method) => {
-        return APIMethods.post(ENDPOINTS.ORDERS(), {customer_name, items, total_price, is_delivery, target_time, payment_method});
+    static newOrder = (customer_name, customer_id, items, total_price, is_delivery, target_time, payment_method) => {
+        return APIMethods.post(ENDPOINTS.ORDERS(), {customer_name, customer_id, items, total_price, is_delivery, target_time, payment_method});
     }
 
     static updateOrderStatus = (id, data) => {
@@ -27,6 +27,10 @@ class ApiManager {
 
     static getCustomerAddress = (customer_id) => {
         return APIMethods.get(ENDPOINTS.ADDRESS(customer_id));
+    }
+
+    static getPreviousOrders = (customer_id) => {
+        return APIMethods.get(ENDPOINTS.USER_ORDERS(customer_id));
     }
 
     // static events = () => {

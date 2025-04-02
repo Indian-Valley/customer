@@ -5,6 +5,8 @@ const ENDPOINTS = {
     SPECIFIC_ORDER: (id) => `/orders/${id}`,
     ADDRESS: (id)=> `/addresses/${id}`,
 
+    USER_ORDERS: (id) => `/customers/previous-orders/${id}`,
+
     EVENTS: (id) => `/events/customers/${id}`,
 }
 

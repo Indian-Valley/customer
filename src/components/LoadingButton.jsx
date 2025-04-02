@@ -2,7 +2,7 @@ import React from "react";
 import {ActivityIndicator, Text, TouchableOpacity, View} from "react-native";
 import {useTheme} from "@react-navigation/native";
 
-export default function LoadingButton({buttonStyle="", text, onPress, loading=false, color}) {
+export default function LoadingButton({buttonStyle="", text, onPress, loading=false, color, active=true}) {
 
     const {colors, shadowStyle} = useTheme();
     if (!color) color = colors.link
@@ -14,8 +14,8 @@ export default function LoadingButton({buttonStyle="", text, onPress, loading=fa
                                    size='large'/>
             </View>
         ):(
-            <TouchableOpacity onPress={onPress}
-                              style={[{backgroundColor: color}, shadowStyle]}
+            <TouchableOpacity onPress={active? onPress: ()=>{}}
+                              style={[{backgroundColor: active? color: colors.defaultText}, shadowStyle]}
                               className={'py-4 bottom-2 justify-items-center rounded-3xl my-2 '+buttonStyle}>
                 <Text className='text-white font-extrabold text-lg m-1 text-center'>{text}</Text>
             </TouchableOpacity>

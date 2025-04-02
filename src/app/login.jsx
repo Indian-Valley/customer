@@ -42,12 +42,12 @@ export default function LoginScreen() {
 
         } else {
             console.log('Success', 'Logged in!');
-            // navigation.replace('/home');
+            navigation.replace('/home');
         }
     };
 
     return (
-        <SafeAreaView className="flex-1">
+        <View className="flex-1">
             <Header title='Login' hasBack={true}/>
 
             <View className='p-5'>
@@ -96,7 +96,7 @@ export default function LoginScreen() {
 
             <View className='mt-auto px-4'>
 
-                <View className='flex-row items-center justify-center'>
+                <View className='flex-row items-center justify-center pb-4'>
                     <Text style={{color: colors.text}}>
                         Don't have an account?
                     </Text>
@@ -107,7 +107,7 @@ export default function LoginScreen() {
                 </View>
             </View>
 
-        </SafeAreaView>
+        </View>
     )
 
 }

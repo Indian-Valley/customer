@@ -1,26 +1,28 @@
 import {View, Text, SafeAreaView, Image, TouchableOpacity} from 'react-native';
 import React, {useEffect} from 'react'
 import * as Icon from "react-native-feather"
-import {themeColors} from "../../../theme";
 import { useRouter } from "expo-router";
 import MapView, {Marker} from "react-native-maps";
 import {location} from "../../../constants"
 import {useDispatch} from "react-redux";
 import {emptyCart} from "../../../slices/cartSlice";
+import {useTheme} from "@react-navigation/native";
 
 
 export default function OrderConfirmationScreen() {
+
     const navigation = useRouter();
     const dispatch = useDispatch();
+    const {colors} = useTheme();
 
     useEffect(() => {
         dispatch(emptyCart());
     })
     return (
-        <SafeAreaView className="flex-1 bg-white">
+        <View className="flex-1">
             <View className="relative py-4 shadow-sm border-b border-gray-400">
                 <TouchableOpacity onPress={()=>{ navigation.dismissTo('/home') }}
-                                  style={{backgroundColor: themeColors.bgColor(1)}}
+                                  style={{backgroundColor: colors.link}}
                                   className="z-10 absolute top-3 left-3 rounded-full p-1">
                     <Icon.ArrowLeft strokeWidth={3} stroke={'white'}></Icon.ArrowLeft>
                 </TouchableOpacity>
@@ -28,19 +30,7 @@ export default function OrderConfirmationScreen() {
                     <Text className="text-center font-bold text-xl">Order Placed!</Text>
                 </View>
             </View>
-            <MapView initialRegion={{
-                        latitude: location.lat,
-                        longitude: location.lng,
-                        latitudeDelta: 0.01,
-                        longitudeDelta: 0.01
-                    }}
-                    className="flex-1"
-                    mapType='standard'>
-                <Marker coordinate={{latitude: location.lat, longitude: location.lng}}
-                        title='Indian Valley'
-                        description='We are here, and always ready to deliver excellence'
-                        pinColor={themeColors.bgColor(1)}/>
-            </MapView>
+
             <View className="rounded-t-3xl -mt-12 bg-white relative">
                 <View className="flex-row justify-between px-5 pt-10">
                     <View>
@@ -54,7 +44,7 @@ export default function OrderConfirmationScreen() {
                     </View>
                     <Image className="w-24 h-24" source={require('@/assets/images/chef.gif')}/>
                 </View>
-                <View style={{backgroundColor: themeColors.bgColor(0.8)}}
+                <View style={{backgroundColor: colors.primaryTransparent(0.8)}}
                       className="px-4 flex-row justify-between items-center rounded-full my-5 mx-2">
                     <View className="flex-1 ml-3 py-3">
                         <Text className="text-white text-xs">Need some help?</Text>
@@ -62,11 +52,11 @@ export default function OrderConfirmationScreen() {
                     </View>
                     <View className="flex-row items-center space-x-3 mr-3">
                         <TouchableOpacity className="bg-white p-2 rounded-full">
-                            <Icon.Phone fill={themeColors.bgColor(0.5)} stroke={'black'}/>
+                            <Icon.Phone fill={colors.primaryTransparent(0.5)} stroke={'black'}/>
                         </TouchableOpacity>
                     </View>
                 </View>
             </View>
-        </SafeAreaView>
+        </View>
     )
 }

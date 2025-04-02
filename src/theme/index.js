@@ -67,7 +67,7 @@ export const darkTheme = {
     shadowStyle: StyleSheet.create({
         shadowColor: '#505f50',
         shadowOpacity: 0.4,
-        shadowRadius: 10,
+        shadowRadius: 15,
         elevation: 4,
     }),
     textStyle: StyleSheet.create({

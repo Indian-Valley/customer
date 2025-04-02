@@ -77,11 +77,11 @@ export default function AccountScreen() {
                             <ListItem.Title style={textStyle}>Edit Personal Details</ListItem.Title>
                         </ListItem.Content>
 
-                        <Icon name='edit' size={30}  color={colors.text}/>
+                        <Icon name='edit' size={30} color={colors.text}/>
                         <ListItem.Chevron color={colors.text}/>
                     </ListItem>
 
-                    <ListItem onPress={() => navigation.push('/account/edit-data')}
+                    <ListItem onPress={() => navigation.push('/more/account/change-password')}
                               bottomDivider
                               Component={TouchableOpacity}
                               containerStyle={{backgroundColor: colors.card, padding: 16}}>

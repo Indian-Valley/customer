@@ -7,8 +7,9 @@ import LoadingButton from "../../../../components/LoadingButton";
 import {useRouter} from "expo-router";
 import {useAuth} from "../../../../contexts/AuthContexts";
 import {ListItem} from "@rneui/themed";
+import Header from "../../../../components/Header";
 
-export default function EditDataScreen({firstName, lastName, email, mobile}) {
+export default function EditDataScreen() {
 
     const navigation = useRouter();
     const {user, userDataLoading} = useAuth()
@@ -18,27 +19,25 @@ export default function EditDataScreen({firstName, lastName, email, mobile}) {
     const [loading, setLoading] = useState(false);
 
     const firstNameRef = useRef(user.first_names);
-    const lastNameRef = useRef('');
+    const lastNameRef = useRef(user.last_name);
     const emailRef = useRef(user.email);
-    const phoneRef = useRef('');
-    const passwordRef = useRef('');
-    const newPasswordRef = useRef('');
+    const phoneRef = useRef(user.tel);
+
+    React.useEffect(() => {
+        console.log(user);
+
+        firstNameRef.value = user.first_names;
+        lastNameRef.value = user.last_name
+        emailRef.value = user.email
+        phoneRef.value = user.tel
+    }, [user])
 
     const onSubmit = () => {
 
     }
     return (
         <View>
-            <View className="relative py-4">
-                <TouchableOpacity onPress={()=>{ navigation.back() }}
-                                  style={{backgroundColor: colors.link}}
-                                  className="absolute z-10 top-3 left-3 rounded-full p-1.5">
-                    <Icon.ChevronLeft strokeWidth={3} stroke={colors.linkText} />
-                </TouchableOpacity>
-                <View>
-                    <Text style={textStyle} className="text-center font-bold text-2xl">Edit Details</Text>
-                </View>
-            </View>
+            <Header hasBack={true} useSafeArea={false} title="Edit Data" />
 
             <ScrollView>
 
@@ -48,47 +47,59 @@ export default function EditDataScreen({firstName, lastName, email, mobile}) {
                                            size='large'/>
                     </View>
                 ) : (<>
+                <View className='border-y border-gray-500 mt-4'>
+
+                    <ListItem onPress={() => {}}
+                              bottomDivider
+                              Component={TouchableOpacity}
+                              containerStyle={{backgroundColor: colors.card}}>
+                        <ListItem.Content>
+                            <ListItem.Title style={textStyle}>Forename</ListItem.Title>
+                        </ListItem.Content>
+                        <ListItem.Input placeholder='Enter Forename...'
+                                        value={firstNameRef.value}
+                                        style={textStyle}/>
+                    </ListItem>
+                    <ListItem onPress={() => {}}
+                              Component={TouchableOpacity}
+                              containerStyle={{backgroundColor: colors.card}}>
+                        <ListItem.Content>
+                            <ListItem.Title style={textStyle}>Surname</ListItem.Title>
+                        </ListItem.Content>
+
+                        <ListItem.Input placeholder='Enter Surname...'
+                                        value={lastNameRef.value}
+                                        style={textStyle}/>
+
+                    </ListItem>
+
+                </View>
+                <View className='border-y border-gray-500 mt-4'>
 
                 <ListItem onPress={() => {}}
-                          bottomDivider
-                          containerStyle={{backgroundColor: colors.background}}>
-                    <ListItem.Content>
-                        <ListItem.Title style={textStyle}>Forename</ListItem.Title>
-                    </ListItem.Content>
-                    <ListItem.Input placeholder={user.first_names? user.first_names : 'Enter Forename...'} style={textStyle}/>
-                    <ListItem.Chevron />
-                </ListItem>
-                <ListItem onPress={() => {}}
-                          bottomDivider
-                          containerStyle={{backgroundColor: colors.background}}>
-                    <ListItem.Content>
-                        <ListItem.Title style={textStyle}>Surname</ListItem.Title>
-                    </ListItem.Content>
-
-                    <ListItem.Input placeholder={user.last_name? user.last_name : 'Enter Surname...'} style={textStyle}/>
-                    <ListItem.Chevron />
-
-                </ListItem>
-                <ListItem onPress={() => {}}
-                          bottomDivider
-                          containerStyle={{backgroundColor: colors.background}}>
+                          Component={TouchableOpacity}
+                          containerStyle={{backgroundColor: colors.card, padding: 12}}>
                     <ListItem.Content>
                         <ListItem.Title  style={textStyle}>Contact Number</ListItem.Title>
                     </ListItem.Content>
-                    <ListItem.Subtitle style={textStyle}>
-                        {`${user?.tel}`}
-                    </ListItem.Subtitle>
+                    <ListItem.Input placeholder='Enter Mobile...'
+                                    value={phoneRef.value}
+                                    style={textStyle}/>
                 </ListItem>
+                </View>
+                <View className='border-y border-gray-500 mt-4'>
+
                 <ListItem onPress={() => {}}
-                          bottomDivider
-                          containerStyle={{backgroundColor: colors.background}}>
+                          Component={TouchableOpacity}
+                          containerStyle={{backgroundColor: colors.card}}>
                     <ListItem.Content>
                         <ListItem.Title style={textStyle}>Email</ListItem.Title>
                     </ListItem.Content>
-                    <ListItem.Title style={textStyle}>
-                        {user?.email}
-                    </ListItem.Title>
+                    <ListItem.Input placeholder='Enter Email...'
+                                    value={emailRef.value}
+                                    style={textStyle}/>
                 </ListItem>
+                </View>
                 </>)}
 
             </ScrollView>

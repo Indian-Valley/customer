@@ -50,7 +50,7 @@ export default function WelcomeScreen() {
                                onPress={() => navigation.navigate('/signup')}
                                shadow={true}/>
 
-                <View className='flex-row items-center justify-center'>
+                <View className='flex-row items-center justify-center pb-4'>
                     <Text style={textStyle} >Already have an account?</Text>
                     <Pressable style={({pressed}) => [{opacity: pressed ? 0.7 : 1.0 }]}
                                onPress={() => navigation.navigate('/login')}>

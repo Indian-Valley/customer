@@ -1,4 +1,15 @@
-import {View, Text, ScrollView, Image, TouchableOpacity, Dimensions, SafeAreaView} from 'react-native';
+import {
+    View,
+    Text,
+    ScrollView,
+    Image,
+    TouchableOpacity,
+    Dimensions,
+    SafeAreaView,
+    Modal,
+    Pressable,
+    Alert
+} from 'react-native';
 import React, {useRef} from 'react'
 import * as Icon from "react-native-feather"
 import Categories from "../../../components/Categories";
@@ -12,6 +23,7 @@ import MenuDivider from "../../../components/MenuDivider";
 import {useSafeAreaInsets} from "react-native-safe-area-context";
 import Header from "../../../components/Header";
 import {Divider} from "@rneui/themed";
+import MenuHeader from "../../../components/MenuHeader";
 
 export default function MenuScreen() {
     const { width, height } = Dimensions.get('window');
@@ -63,7 +75,7 @@ export default function MenuScreen() {
     }
 
     return (
-        <View>
+        <View className='flex-1'>
 
             <View style={{marginTop:insets.top}} className="w-full h-96 -z-50 absolute">
                 <Image className='object-contain' style={{flex: 1, width: undefined, height: undefined}}
@@ -71,7 +83,7 @@ export default function MenuScreen() {
             </View>
 
             <View className='w-full z-40'>
-                <Header title='Menu' hasBack={true} showAccount={true}/>
+                <MenuHeader/>
             </View>
             <ScrollView ref={scrollRef}
                         showsVerticalScrollIndicator={false}
@@ -80,7 +92,6 @@ export default function MenuScreen() {
 
 
                 <View className='w-full h-72' />
-
                 <View style={{borderTopLeftRadius: 40, borderTopRightRadius: 40, backgroundColor: colors.background}}
                       className="-mt-5 p-4 z-30">
                     <Text style={{color: colors.text}} className="text-3xl py-4 font-bold text-center">Menu</Text>
@@ -128,12 +139,11 @@ export default function MenuScreen() {
 
             <CartIcon/>
 
-            <Animated.View style={[buttonStyle, {backgroundColor: colors.link}]} className="absolute bottom-40 right-2 p-2 z-50 rounded-full">
+            <Animated.View style={[buttonStyle, {backgroundColor: colors.link}, shadowStyle]} className="absolute bottom-20 right-2 p-2 z-50 rounded-full">
                 <TouchableOpacity onPress={scrollToTop}>
                     <Icon.ArrowUp strokeWidth={3} height={32} width={32} stroke={colors.linkText}/>
                 </TouchableOpacity>
             </Animated.View>
-
 
 
 

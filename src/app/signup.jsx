@@ -61,7 +61,7 @@ export default function SignUpScreen() {
     };
 
     return (
-        <SafeAreaView className="flex-1">
+        <View className="flex-1">
             <Header title='Sign Up' hasBack={true}/>
 
             <ScrollView className='p-5'>
@@ -120,7 +120,7 @@ export default function SignUpScreen() {
                     </TouchableOpacity>
                 </View>
 
-                <View className='flex-row items-center justify-center gap-1'>
+                <View className='flex-row items-center justify-center gap-1 pb-8'>
                     <Text style={textStyle}>
                         Already have an account?
                     </Text>
@@ -129,7 +129,7 @@ export default function SignUpScreen() {
                     </Pressable>
                 </View>
             </ScrollView>
-        </SafeAreaView>
+        </View>
     )
 
 }

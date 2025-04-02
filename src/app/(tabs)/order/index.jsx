@@ -1,78 +1,117 @@
 import {useRouter} from "expo-router";
-import {SafeAreaView, Text, TextInput, TouchableOpacity, View} from "react-native";
+import {
+    Image, ScrollView,
+    Text,
+    TouchableOpacity,
+    View
+} from "react-native";
 import LoadingButton from "../../../components/LoadingButton";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useTheme} from "@react-navigation/native";
 import Header from "../../../components/Header";
+import {useSafeAreaInsets} from "react-native-safe-area-context";
+import {useDispatch} from "react-redux";
+import { setOrderType } from "../../../slices/orderDetailsSlice";
 
 export default function OrderScreen() {
 
-    const {colors} = useTheme()
+    const insets = useSafeAreaInsets()
+    const {colors, shadowStyle, textStyle} = useTheme()
 
-    const [deliverySelected, setDeliverySelected] = useState(true);
+    const [stateSelected, setStateSelected] = React.useState(0);
+    const orderTypes = ['NOT SELECTED', 'Booking', 'Collection', 'Delivery']
 
     const navigation = useRouter();
 
+    const dispatch = useDispatch();
+    const handleSelectedOrderType = () => {
+        console.log("handleSelectedOrderType", orderTypes[stateSelected])
+        dispatch(setOrderType(orderTypes[stateSelected]));
+    }
+
     return (
-        <View className="flex-1">
+        <View className='w-full h-full'>
             <Header title='Order' showAccount={true}/>
 
-            <View className='shadow-2xl rounded-3xl mx-3'>
+            <ScrollView className='py-2'>
+                <TouchableOpacity onPress={() => setStateSelected(1)}
+                           style={[
+                               shadowStyle,
+                               {
+                                   backgroundColor: colors.card,
+                                   borderColor: stateSelected === 1?  colors.link : colors.text,
+                                   shadowColor: stateSelected === 1? colors.link: colors.text,
+                               }
+                           ]}
+                           className='my-2 h-40 flex-row border-y-4'>
+                    <View className='p-4 pr-0 w-1/2'>
+                        <Text style={textStyle} className='font-extrabold text-2xl'>Our Place?</Text>
+                        <Text style={textStyle} className='p-2'>Book a table to dine in</Text>
+                    </View>
+                    <View className='w-1/2 p-2'>
+                        <Image source={require('@/assets/images/dinner.png')}
+                               resizeMode='contain'
+                               style={{width: undefined, height: undefined, flex: 1}} />
+                    </View>
+                </TouchableOpacity>
 
-                <View className="relative py-4 shadow-sm">
-                    <Text style={{fontFamily: 'Verdana'}} className='text-3xl font-extrabold text-center text-gray-700'>START YOUR ORDER</Text>
-                </View>
+                <TouchableOpacity onPress={() => setStateSelected(2)}
+                           style={[
+                               shadowStyle,
+                               {
+                                   backgroundColor: colors.card,
+                                   borderColor: stateSelected === 2?  colors.link : colors.text,
+                                   shadowColor: stateSelected === 2? colors.link: colors.text,
+                               }
+                           ]}
+                           className='my-2 h-40 flex-row border-y-4'>
+                    <View className='w-1/2 p-4'>
+                        <Image source={require('@/assets/images/takeaway.png')}
+                               resizeMode='contain'
+                               style={{width: undefined, height: undefined, flex: 1}} />
+                    </View>
+                    <View className='w-1/2 p-4 pl-0'>
+                        <Text style={textStyle} className='font-extrabold text-2xl text-right'>...For Takeaway?</Text>
+                        <Text style={textStyle} className='text-right p-1'>Order for collection </Text>
 
-                <View className='flex-row'>
+                    </View>
 
-                    <TouchableOpacity style={{backgroundColor: colors.background}}
-                                      className='flex-1 m-2 p-3 rounded-full'
-                                      onPress={() => setDeliverySelected(true)}>
-                        <Text className={`text-center text-lg text-white ${deliverySelected? "font-bold":"font-medium"}`}>Delivery</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={{backgroundColor: colors.background}}
-                                      className='flex-1 m-2 p-3 rounded-full'
-                                      onPress={() => setDeliverySelected(false)}>
-                        <Text className={`text-center text-lg text-white ${deliverySelected? "font-medium" : "font-bold"}`}>Collection</Text>
-                    </TouchableOpacity>
-                </View>
+                </TouchableOpacity>
 
-                <View className="m-2 p-3 bg-white rounded-2xl">
-                    {
-                        deliverySelected? (
-                            <View>
-                                <Text className="font-bold mb-1">Delivery To:</Text>
-                                <View className="flex-row">
-                                    <TextInput className="flex-1 rounded-xl py-1 px-2 text-gray-600 border"
-                                               placeholder="Postcode"/>
-                                    <TouchableOpacity className="flex-2 bg-gray-700 mx-1 rounded-xl py-1 px-2">
-                                        <Text className="text-white text-xs text-center">Find Address</Text>
-                                    </TouchableOpacity>
-                                </View>
-                                <Text className="text-gray-700 text-xs mt-1 text-right">Or Enter Address Manually</Text>
+                <TouchableOpacity onPress={() => setStateSelected(3)}
+                           style={[
+                               shadowStyle,
+                               {
+                                   backgroundColor: colors.card,
+                                   borderColor: stateSelected === 3?  colors.link : colors.text,
+                                   shadowColor: stateSelected === 3? colors.link: colors.text,
+                               }
+                           ]}
+                           className='my-2 h-40 flex-row border-y-4'>
 
-                                <TextInput className="border rounded-xl px-2 py-1" placeholder="Address line 1"/>
-                                <TextInput className="border rounded-xl px-2 py-1 mt-1" placeholder="Address line 2"/>
-                                <TextInput className="border rounded-xl px-2 py-1 my-1" placeholder="Town"/>
-                            </View>
-                        ) : (
-                            <View>
-                                <Text className="font-bold mb-1">Collection for:</Text>
+                    <View className='w-1/2 p-4 pr-0'>
+                        <Text style={textStyle} className='font-extrabold text-2xl text-center'>...Or to You?</Text>
+                        <Text style={textStyle}>Order for delivery </Text>
+                    </View>
 
-                                <TextInput className="border rounded-xl px-2 py-1 mt-1" placeholder="Name"/>
-                                <TextInput className="border rounded-xl px-2 py-1 my-1" placeholder="Time"/>
-                            </View>
-                        )}
+                    <View className='w-1/2 p-2'>
+                        <Image source={require('@/assets/images/food-delivery.png')}
+                               resizeMode='contain'
+                               style={{width: undefined, height: undefined, flex: 1}} />
+                    </View>
+                </TouchableOpacity>
 
-
+                <View className='m-8'>
                     <LoadingButton text='Next'
-                                   loading={false}
-                                   onPress={() => navigation.navigate('/order/menu')}
-                                   shadow={true}/>
+                                   onPress={() => {
+                                       handleSelectedOrderType()
+                                       navigation.navigate('/order/menu')
+                                   }}
+                                   active={stateSelected > 0}/>
                 </View>
+            </ScrollView>
 
-
-            </View>
         </View>
+
     )
 }

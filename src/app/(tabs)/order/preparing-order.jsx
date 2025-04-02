@@ -5,12 +5,28 @@ import { useRouter} from "expo-router";
 import {useSelector} from "react-redux";
 import {selectCartItems, selectCartTotal} from "../../../slices/cartSlice";
 import ApiManager from "../../../apiManager/apiManager";
+import {useTheme} from "@react-navigation/native";
+import {useAuth} from "../../../contexts/AuthContexts";
+import {
+    selectIsASAP,
+    selectOrderTotal,
+    selectOrderType,
+    selectSelectedAddress,
+    selectSelectedTime,
+} from "../../../slices/orderDetailsSlice";
 
 
 export default function OrderPreparingScreen() {
 
+    const {textStyle} = useTheme();
+    const {user} = useAuth()
+
     const cartItems = useSelector(selectCartItems);
-    const cartTotal = useSelector(selectCartTotal);
+    const orderTotal = useSelector(selectOrderTotal);
+    const orderType = useSelector(selectOrderType);
+    const orderASAP = useSelector(selectIsASAP);
+    const orderTime = useSelector(selectSelectedTime);
+    const orderAddress = useSelector(selectSelectedAddress);
 
     const navigation = useRouter();
     useEffect(() => {
@@ -34,7 +50,17 @@ export default function OrderPreparingScreen() {
         // console.log('orderItems: ', orderItems);
 
         async function postOrderToServer() {
-            const res = await ApiManager.newOrder("Mumin", orderItems, cartTotal, false, "22:22:11", "cash");
+            const delivery = orderType==='DELIVERY'
+            const res = await ApiManager.newOrder(
+                `${user.first_names} ${user.last_name}` ,
+                user.customer_id,
+                orderItems,
+                orderTotal,
+                delivery,
+                orderASAP? null: orderTime,
+                "cash",
+                delivery? orderAddress : null,
+            );
             console.log('res', res)
             if (res?.success) {
                 navigation.replace("/order/order-confirmation")
@@ -47,8 +73,8 @@ export default function OrderPreparingScreen() {
     })
     return (
         <View className="flex-1 bg-white justify-center items-center">
-            <Image source={require('../../../../assets/images/chef.gif')} className="w-80 h-80"/>
-            <Text className="text-gray-600 font-bold text-lg">Placing your order...</Text>
+            <Image source={require('@/assets/images/chef.gif')} className="w-80 h-80"/>
+            <Text style={textStyle} className="font-bold text-lg">Placing your order...</Text>
         </View>
     )
 }

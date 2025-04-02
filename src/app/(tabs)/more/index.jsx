@@ -41,7 +41,7 @@ export default function MoreScreen() {
 
     return (
         <View className='flex-1'>
-            <Header title='More' padding={4}/>
+            <Header title='More' showAccount={true}/>
 
             <ScrollView showsVerticalScrollIndicator={false}>
 
@@ -85,11 +85,21 @@ export default function MoreScreen() {
 
                         <ListItem.Chevron color={colors.text}/>
                     </ListItem>
+                    <ListItem onPress={() => navigation.navigate('/offers')}
+                              Component={TouchableOpacity}
+                              containerStyle={{backgroundColor: colors.card, padding: 16}}>
+                        <Icon name='emoji-events' size={30} color={colors.text}/>
+                        <ListItem.Content>
+                            <ListItem.Title style={textStyle}>Rewards Program</ListItem.Title>
+                        </ListItem.Content>
+
+                        <ListItem.Chevron color={colors.text}/>
+                    </ListItem>
                 </View>
 
                 <View className='border-y border-gray-500 mt-4'>
 
-                    <ListItem onPress={() => navigation.navigate('/more/order-history')}
+                    <ListItem onPress={() => {}}
                               bottomDivider
                               Component={TouchableOpacity}
                               containerStyle={{backgroundColor: colors.card, padding: 16}}>
@@ -98,9 +108,22 @@ export default function MoreScreen() {
                             <ListItem.Title style={textStyle}>Rate Us!</ListItem.Title>
                         </ListItem.Content>
 
+                        <ListItem.Chevron color={colors.text}
+                                          name='open-in-new'
+                                          type='material' />
+                    </ListItem>
+                    <ListItem onPress={() => {}}
+                              bottomDivider
+                              Component={TouchableOpacity}
+                              containerStyle={{backgroundColor: colors.card, padding: 16}}>
+                        <Icon name='rate-review' size={30} color={colors.text}/>
+                        <ListItem.Content>
+                            <ListItem.Title style={textStyle}>Leave Feedback</ListItem.Title>
+                        </ListItem.Content>
+
                         <ListItem.Chevron color={colors.text}/>
                     </ListItem>
-                    <ListItem onPress={() => navigation.navigate('/more/order-history')}
+                    <ListItem onPress={() => {}}
                               bottomDivider
                               Component={TouchableOpacity}
                               containerStyle={{backgroundColor: colors.card, padding: 16}}>
@@ -109,10 +132,11 @@ export default function MoreScreen() {
                             <ListItem.Title style={textStyle}>Privacy Policy</ListItem.Title>
                         </ListItem.Content>
 
-                        <ListItem.Chevron color={colors.text}/>
+                        <ListItem.Chevron color={colors.text}
+                                          type='material'
+                                          name='open-in-new'/>
                     </ListItem>
-                    <ListItem onPress={() => navigation.navigate('/more/order-history')}
-                              bottomDivider
+                    <ListItem onPress={() => {}}
                               Component={TouchableOpacity}
                               containerStyle={{backgroundColor: colors.card, padding: 16}}>
                         <Icon name='gavel' size={30} color={colors.text}/>
@@ -120,7 +144,9 @@ export default function MoreScreen() {
                             <ListItem.Title style={textStyle}>Terms & Conditions</ListItem.Title>
                         </ListItem.Content>
 
-                        <ListItem.Chevron color={colors.text}/>
+                        <ListItem.Chevron name='open-in-new'
+                                          type='material'
+                                          color={colors.text}/>
                     </ListItem>
                 </View>
                 <Text style={{color: colors.defaultText}} className='m-1'>App Version 0.01</Text>

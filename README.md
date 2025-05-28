@@ -15,7 +15,6 @@ A mobile application developed using React Native and Expo for Indian Valley, a 
 - Backend: Node.js with Express (see server repository)
 - Database: Supabase
 - Authentication: Supabase Auth
-- State Management: React Context API
     
 ## Installation & Running the App
 
@@ -23,16 +22,16 @@ Will be available to download and install from Google Play and the App Store
 
 ## Screenshots
 
-### Login/Signup
-![Login Screen](./screenshots/welcome.png)
-![Login Screen](./screenshots/login.png)
-![Login Screen](./screenshots/signup.png)
+|                   Welcome                    |                  Login                   |                   Signup                   |
+|:--------------------------------------------:|:----------------------------------------:|:------------------------------------------:|
+| ![Welcome Screen](./screenshots/welcome.png) | ![Login Screen](./screenshots/login.png) | ![Signup Screen](./screenshots/signup.png) |
 
-### Main Screens
-![Home Screen](./screenshots/home.png)
-![Home Screen](./screenshots/menu1.png)
-![Home Screen](./screenshots/memu2.png)
 
-### Placing Order
-![Cart Screen](./screenshots/cart.png)
-![Order Confirmation](./screenshots/order-confirmation.png)
+|                  Home                  |                 Menu 1                  |                 Menu 2                  |
+|:--------------------------------------:|:---------------------------------------:|:---------------------------------------:|
+| ![Home Screen](./screenshots/home.png) | ![Menu Screen](./screenshots/menu1.png) | ![Menu Screen](./screenshots/menu2.png) |
+
+|                  Cart                  |                     Order Confirmation                      |      
+|:--------------------------------------:|:-----------------------------------------------------------:|
+| ![Cart Screen](./screenshots/cart.png) | ![Order Confirmation](./screenshots/order-confirmation.png) |
+

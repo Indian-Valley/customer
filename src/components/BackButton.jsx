@@ -9,7 +9,7 @@ export default function BackButton({show=true, backPress}) {
     const navigation = useRouter()
     const {colors, shadowStyle} = useTheme()
 
-    const onPress = backPress? backPress : () => {navigation.back()}
+    const onPress = (backPress!==undefined)? backPress : () => navigation.back()
 
     return (
         <>

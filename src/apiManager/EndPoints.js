@@ -3,7 +3,8 @@ const ENDPOINTS = {
 
     ORDERS: () => `/orders`,
     SPECIFIC_ORDER: (id) => `/orders/${id}`,
-    ADDRESS: (id)=> `/addresses/${id}`,
+    CUSTOMER_ADDRESS: (id)=> `/addresses/${id}`,
+    ADDRESS: ()=> `/addresses`,
 
     USER_ORDERS: (id) => `/customers/previous-orders/${id}`,
 

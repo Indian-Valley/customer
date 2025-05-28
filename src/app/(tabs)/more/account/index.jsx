@@ -93,7 +93,7 @@ export default function AccountScreen() {
                         <ListItem.Chevron color={colors.text}/>
                     </ListItem>
 
-                    <ListItem onPress={() => navigation.push('/account/edit-data')}
+                    <ListItem onPress={() => navigation.push('/more/account/delivery-address')}
                               bottomDivider
                               Component={TouchableOpacity}
                               containerStyle={{backgroundColor: colors.card, padding: 16}}>

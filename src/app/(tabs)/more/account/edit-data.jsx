@@ -26,10 +26,10 @@ export default function EditDataScreen() {
     React.useEffect(() => {
         console.log(user);
 
-        firstNameRef.value = user.first_names;
-        lastNameRef.value = user.last_name
-        emailRef.value = user.email
-        phoneRef.value = user.tel
+        firstNameRef.current = user.first_names;
+        lastNameRef.current = user.last_name
+        emailRef.current = user.email
+        phoneRef.current = user.tel
     }, [user])
 
     const onSubmit = () => {
@@ -57,7 +57,7 @@ export default function EditDataScreen() {
                             <ListItem.Title style={textStyle}>Forename</ListItem.Title>
                         </ListItem.Content>
                         <ListItem.Input placeholder='Enter Forename...'
-                                        value={firstNameRef.value}
+                                        value={firstNameRef.current}
                                         style={textStyle}/>
                     </ListItem>
                     <ListItem onPress={() => {}}
@@ -68,7 +68,7 @@ export default function EditDataScreen() {
                         </ListItem.Content>
 
                         <ListItem.Input placeholder='Enter Surname...'
-                                        value={lastNameRef.value}
+                                        value={lastNameRef.current}
                                         style={textStyle}/>
 
                     </ListItem>
@@ -83,7 +83,7 @@ export default function EditDataScreen() {
                         <ListItem.Title  style={textStyle}>Contact Number</ListItem.Title>
                     </ListItem.Content>
                     <ListItem.Input placeholder='Enter Mobile...'
-                                    value={phoneRef.value}
+                                    value={phoneRef.current}
                                     style={textStyle}/>
                 </ListItem>
                 </View>
@@ -96,7 +96,7 @@ export default function EditDataScreen() {
                         <ListItem.Title style={textStyle}>Email</ListItem.Title>
                     </ListItem.Content>
                     <ListItem.Input placeholder='Enter Email...'
-                                    value={emailRef.value}
+                                    value={emailRef.current}
                                     style={textStyle}/>
                 </ListItem>
                 </View>

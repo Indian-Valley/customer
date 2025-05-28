@@ -8,6 +8,7 @@ export default function AccountLayout() {
             <Stack.Screen name="index" options={{presentation: 'fullScreenModal', title: "Account"}}/>
             <Stack.Screen name="edit-data" options={{presentation: 'modal', title: "edit"}}/>
             <Stack.Screen name="change-password" options={{presentation: 'modal', title: "edit"}}/>
+            <Stack.Screen name="delivery-address" options={{presentation: 'modal', title: "edit"}}/>
 
         </Stack>
     );

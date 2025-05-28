@@ -35,7 +35,8 @@ export const lightTheme = {
         background: themeColors.background,
         link: themeColors.action,
         linkText: '#ffffff',
-        danger: '#CD5C5C'
+        danger: '#CD5C5C',
+        help: '#c59647'
     },
     shadowStyle: StyleSheet.create({
         shadowColor: '#15290c',
@@ -62,7 +63,8 @@ export const darkTheme = {
         background: themeColors.backgroundDark,
         link: themeColors.action,
         linkText: '#ffffff',
-        danger: '#DC143C'
+        danger: '#DC143C',
+        help: '#c59647'
     },
     shadowStyle: StyleSheet.create({
         shadowColor: '#505f50',

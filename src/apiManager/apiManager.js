@@ -26,7 +26,11 @@ class ApiManager {
     }
 
     static getCustomerAddress = (customer_id) => {
-        return APIMethods.get(ENDPOINTS.ADDRESS(customer_id));
+        return APIMethods.get(ENDPOINTS.CUSTOMER_ADDRESS(customer_id));
+    }
+
+    static addCustomerAddress = (customer_id, line1, line2, town, postcode) => {
+        return APIMethods.post(ENDPOINTS.ADDRESS(), {customer_id, line1, line2, town, postcode});
     }
 
     static getPreviousOrders = (customer_id) => {

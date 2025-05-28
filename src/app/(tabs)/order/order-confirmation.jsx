@@ -1,62 +1,85 @@
-import {View, Text, SafeAreaView, Image, TouchableOpacity} from 'react-native';
+import {View, Text, Image, TouchableOpacity} from 'react-native';
 import React, {useEffect} from 'react'
 import * as Icon from "react-native-feather"
-import { useRouter } from "expo-router";
-import MapView, {Marker} from "react-native-maps";
-import {location} from "../../../constants"
+import {Link, useRouter} from "expo-router";
 import {useDispatch} from "react-redux";
 import {emptyCart} from "../../../slices/cartSlice";
 import {useTheme} from "@react-navigation/native";
+import Header from "../../../components/Header";
+import MenuDivider from "../../../components/MenuDivider";
 
 
 export default function OrderConfirmationScreen() {
 
-    const navigation = useRouter();
+    const router = useRouter();
     const dispatch = useDispatch();
-    const {colors} = useTheme();
+    const {colors, textStyle, shadowStyle} = useTheme();
 
     useEffect(() => {
         dispatch(emptyCart());
     })
     return (
-        <View className="flex-1">
-            <View className="relative py-4 shadow-sm border-b border-gray-400">
-                <TouchableOpacity onPress={()=>{ navigation.dismissTo('/home') }}
-                                  style={{backgroundColor: colors.link}}
-                                  className="z-10 absolute top-3 left-3 rounded-full p-1">
-                    <Icon.ArrowLeft strokeWidth={3} stroke={'white'}></Icon.ArrowLeft>
-                </TouchableOpacity>
-                <View>
-                    <Text className="text-center font-bold text-xl">Order Placed!</Text>
+        <View style={{backgroundColor: colors.background}} className="w-full h-screen">
+            <Header title='Order Placed' hasBack={true} showAccount={false} backPress={() => {
+                console.log("Back button clicked");
+                router.replace("/order")}
+            }/>
+
+            <View className='m-auto w-3/4'>
+                <Text style={textStyle} className='font-extrabold text-3xl text-center my-4'>Thank You for Ordering!</Text>
+                <MenuDivider></MenuDivider>
+                <Text style={textStyle} className=' text-center my-2'>Enable notifications to alert you when your order status changes: <Link style={{color:colors.link, fontWeight: 'bold'}} href='../more/settings'>Notifications</Link></Text>
+                <Text style={textStyle} className=' text-center my-4'><Link style={{color:colors.link, fontWeight: 'bold'}} href='/home'>Back to home</Link></Text>
+            </View>
+
+            <View className="flex-row justify-between px-5">
+                <View className='w-1/4 p-2 gap-y-2 mt-10 border-t-8 border-white flex-col items-center'>
+                    <View className='border-4 border-white bg-green-600 aspect-square w-3/4 -top-1/2 rounded-full'>
+                    </View>
+                    <Text style={textStyle} className='text-center'>Submitted</Text>
+                </View>
+                <View className='w-1/4 p-2 gap-y-2 mt-10 border-t-8 border-white flex-col items-center'>
+                    <View className='border-4 border-white bg-green-600 aspect-square w-3/4 -top-1/2 rounded-full'>
+                    </View>
+                    <Text style={textStyle} className=''>Cooking</Text>
+                </View>
+                <View className='w-1/4 p-2 gap-y-2 mt-10 border-t-8 border-white flex-col items-center'>
+                    <View className='border-4 border-white bg-gray-600 aspect-square w-3/4 -top-1/2 rounded-full'>
+                    </View>
+                    <Text style={textStyle} className=''>Delivering</Text>
+                </View>
+                <View className='w-1/4 p-2 gap-y-2 mt-10 border-t-8 border-white flex-col items-center'>
+                    <View className='border-4 border-white bg-gray-600 aspect-square w-3/4 -top-1/2 rounded-full'>
+                    </View>
+                    <Text style={textStyle} className=''>Completed</Text>
                 </View>
             </View>
 
-            <View className="rounded-t-3xl -mt-12 bg-white relative">
-                <View className="flex-row justify-between px-5 pt-10">
-                    <View>
-                        <Text className="text-lg text-gray-700 font-semibold">
-                            Estimated Arrival
-                        </Text>
-                        <Text className="text-3xl text-gray-700 font-extrabold">
-                            30-40 Minutes
-                        </Text>
-                        <Text className="mt-2 text-gray-700 font-semibold">Your order is on its way!</Text>
-                    </View>
-                    <Image className="w-24 h-24" source={require('@/assets/images/chef.gif')}/>
+            <View className="flex-row justify-between px-5 pt-10">
+                <View>
+                    <Text style={textStyle} className="text-lg font-semibold">
+                        Estimated Arrival
+                    </Text>
+                    <Text style={textStyle} className="text-3xl font-extrabold">
+                        30-40 Minutes
+                    </Text>
+                    <Text style={textStyle} className="mt-2 font-semibold">Your order will be with you soon!</Text>
                 </View>
-                <View style={{backgroundColor: colors.primaryTransparent(0.8)}}
-                      className="px-4 flex-row justify-between items-center rounded-full my-5 mx-2">
-                    <View className="flex-1 ml-3 py-3">
-                        <Text className="text-white text-xs">Need some help?</Text>
-                        <Text className="-mt-1 text-white text-xl font-bold">Contact Us</Text>
-                    </View>
-                    <View className="flex-row items-center space-x-3 mr-3">
-                        <TouchableOpacity className="bg-white p-2 rounded-full">
-                            <Icon.Phone fill={colors.primaryTransparent(0.5)} stroke={'black'}/>
-                        </TouchableOpacity>
-                    </View>
-                </View>
+                <Image className="w-24 h-24" source={require('@/assets/images/cooking.gif')}/>
             </View>
+
+            <TouchableOpacity style={{backgroundColor: colors.help}}
+                  className="pl-6 pr-8 flex-row justify-between items-center rounded-full m-4">
+                <View className="flex-1 ml-3 py-4">
+                    <Text className="text-white text-xs">Need some help?</Text>
+                    <Text className="-mt-1 text-white text-xl font-bold">Contact Us</Text>
+                </View>
+
+                <Icon.Phone fill={colors.link} stroke='black'/>
+            </TouchableOpacity>
+
+            <View className='h-8'></View>
+
         </View>
     )
 }

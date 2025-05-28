@@ -27,15 +27,17 @@ import {supabase} from "../../../lib/supabase";
 import LoadingButton from "../../../components/LoadingButton";
 
 import { get, save } from '../../../storage';
-import {useTheme} from "@react-navigation/native";
 import {useColorScheme} from "nativewind";
 import {useAuth} from "../../../contexts/AuthContexts";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import Header from "../../../components/Header";
+import {useTheme} from "@react-navigation/native";
+
 
 export default function SettingsScreen() {
 
     const navigation = useRouter();
+
     const {colors, shadowStyle, textStyle} = useTheme()
     const {colorScheme, setColorScheme} = useColorScheme();
 

@@ -1,16 +1,11 @@
-import {useRouter} from "expo-router";
-import {
-    Image, ScrollView,
-    Text,
-    TouchableOpacity,
-    View
-} from "react-native";
+import { useRouter } from "expo-router";
+import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import LoadingButton from "../../../components/LoadingButton";
-import React, {useEffect, useState} from "react";
-import {useTheme} from "@react-navigation/native";
+import React from "react";
+import { useTheme } from "@react-navigation/native";
 import Header from "../../../components/Header";
-import {useSafeAreaInsets} from "react-native-safe-area-context";
-import {useDispatch} from "react-redux";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useDispatch } from "react-redux";
 import { setOrderType } from "../../../slices/orderDetailsSlice";
 
 export default function OrderScreen() {
@@ -24,6 +19,7 @@ export default function OrderScreen() {
     const navigation = useRouter();
 
     const dispatch = useDispatch();
+
     const handleSelectedOrderType = () => {
         console.log("handleSelectedOrderType", orderTypes[stateSelected])
         dispatch(setOrderType(orderTypes[stateSelected]));

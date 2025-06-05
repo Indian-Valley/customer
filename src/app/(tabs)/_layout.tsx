@@ -41,7 +41,7 @@ export default function Layout() {
                          }}
                          listeners={({ navigation}) => ({
                              tabPress: (e) => {
-                                 // e.preventDefault();
+                                 e.preventDefault();
                                  if (orderType === "NOT SELECTED") {
                                      router.navigate("/order");
                                  } else {

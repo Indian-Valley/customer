@@ -21,8 +21,8 @@ export default function OrderConfirmationScreen() {
     return (
         <View style={{backgroundColor: colors.background}} className="w-full h-screen">
             <Header title='Order Placed' hasBack={true} showAccount={false} backPress={() => {
-                console.log("Back button clicked");
-                router.replace("/order")}
+                router.back()
+                router.replace("/home")}
             }/>
 
             <View className='m-auto w-3/4'>

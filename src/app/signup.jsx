@@ -43,6 +43,8 @@ export default function SignUpScreen() {
             options: {
                 data: {
                     first_names: firstName,
+                    last_name: lastName,
+                    phone: phone,
                 }
             }
         });

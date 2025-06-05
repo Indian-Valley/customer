@@ -33,7 +33,7 @@ export default function WelcomeScreen() {
             <View className='w-1/2 h-3/5 m-auto'>
                 <Image
                        style={[{flex: 1, width: undefined, height: undefined, objectFit: 'contain'}, shadowStyle]}
-                       source={require('../../assets/images/logo-1.png')} />
+                       source={require('../../assets/images/logo-green512.png')} />
             </View>
 
             <View className='h-2/5 flex-col justify-between mt-auto'>
